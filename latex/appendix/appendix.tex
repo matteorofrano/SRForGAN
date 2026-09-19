@@ -286,7 +286,7 @@ Our generator instead uses a \emph{linear} output layer,
 so $X=G_\phi(z,c)$ is, in principle, 
 unbounded as $z$ ranges over $\mathbb{R}^{d_z}$.\\
 $G_\phi(z,c)$ is Lipschitz in $z$. By fixing $\phi$ and $c$ it can be seen that
-The map $z\mapsto G_\phi(z,c)$ is a finite composition of two kinds of layers:
+the map $z\mapsto G_\phi(z,c)$ is a finite composition of two kinds of layers:
 \begin{itemize}
 \item affine maps $h\mapsto Wh+b$, like the linear output layer,
 which are Lipschitz with constant $\|W\|_{\mathrm{op}}$ (the operator norm) finite since $W$ is a finite matrix. Here in our case $h$ is the concatenation of the recurrent embedding $h(c)$ and the latent variable $z$.

@@ -1027,12 +1027,6 @@ Earth mover's distance & 0.000707 \\
 
 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{Heston/images/srforgan_samples.png}
-    \caption{Samples obtained using fixed $x_0$, $\mu$, $v_0$, $\theta$, $\kappa$, $\sigma_v$, $\rho$.}
-    \label{srforgan_heston_sample}
-\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -1267,3 +1261,359 @@ Earth mover's distance & 0.001198 \\
 \end{figure}
 
 
+
+\section{Pricing-Based Validation of the Forecast Distribution}
+\label{sec:pricing_validation}
+
+
+The distributional metrics and experiments ran before quantify how close 
+the generated distribution $P^\phi(\cdot\mid\mathbf c)$
+is to the true distribution$P^\star(\cdot\mid\mathbf c)$ in a generic, application-agnostic environment.\\
+The following experiments in this section evaluate the SRForGAN generated distribution in a pricing setting by using European options.
+If $G_\phi$ has genuinely learned the conditional law of
+$S_{t+l}$, discounted expectations of option payoffs computed under
+$P^\phi$ should agree with the corresponding Heston-model prices, across
+a grid of strikes spanning the smile.\\
+
+A single price comparison, may conflates two distinct sources of
+discrepancy, that is, the sampling noise inherent to any Monte Carlo estimator of
+an expectation, and genuine mismatch between $P^\phi$ and $P^\star$. To
+disentangle them, three pricing engines are used side by side.
+\begin{itemize}
+    \item An \emph{oracle} price is obtained semi-analytically from the Heston
+characteristic function using the Fourier inversion method already described in \ref{alg:frFTT} 
+which is the closest available proxy to the true,
+noise-free price, but one that requires knowledge of the latent
+instantaneous variance $v_t$, which $G_\phi$ never observes.
+    \item A \emph{Heston Monte Carlo} price is obtained with the same
+discounted-payoff sample-average estimator as the GAN price, but drawing
+from the true Heston dynamics started from the
+same $(S_t,v_t)$ like in \ref{alg:heston_mc_pdf}.
+    \item A \emph{GAN} price is obtained with the identical
+sample-average estimator, drawing instead from $G_\phi(\cdot\mid\mathbf
+c)$.
+\end{itemize}
+   
+Because the Heston-MC and GAN routes share the same estimator
+family, their standard errors are directly comparable and
+$\text{price}^{\text{GAN}}-\text{price}^{\text{MC}}$ isolates the
+generator's distributional error net of Monte Carlo noise; because the
+oracle and Heston-MC routes both target the true Heston distribution,
+$\text{price}^{\text{MC}}-\text{price}^{\text{oracle}}$ measures pure
+numerical noise and acts as a control, in fact, a large gap here would flag a
+problem with the benchmark itself rather than with $G_\phi$.
+
+\subsection{Experimental design}
+
+\paragraph{Test set.} $J=300$ fresh Heston trajectories (Milstein scheme)
+are simulated with parameters drawn from the training ranges, that allow the Feller condition to be always satisfied, of the previous experiment,
+$\kappa\in[1.5,5.0]$, $\theta\in[0.57,1.5]$, $\sigma_v\in[0.2,1.3]$, and
+$\rho=-0.7$, $v_0=0.5$ fixed. Each
+trajectory carries a conditioning window of $k=252$ observed log-price
+steps ($\approx1$ trading year) and a forecast horizon of $l=10$ steps
+($\approx2$ weeks), matching the training configuration. The reference
+time $t$ is the last index of the conditioning window; $S_t=e^{X_t}$ and
+$v_t$ (both known from simulation, but $v_t$ withheld from $G_\phi$)
+anchor all three pricing engines to the same starting state.
+
+\paragraph{Strike grid.} For every trajectory, strikes are built on a
+common moneyness grid $\mathcal M=\{0.80,0.90,0.95,1.00,1.05,1.10,1.20\}$,
+$K=m\cdot S_t$, so each trajectory contributes the same relative coverage
+of the smile regardless of its own realised spot level. Following
+standard smile-construction practice, options are priced as puts for
+$K<S_t$ and calls for $K\ge S_t$, keeping every quoted contract
+out-of-the-money and away from the numerically unstable deep-ITM region
+of Black--Scholes implied-volatility inversion.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{cc}
+\hline
+$K/S_t$ & \textbf{Contract} \\
+\hline
+0.80 & Put \\
+0.90 & Put \\
+0.95 & Put \\
+1.00 & Call \\
+1.05 & Call \\
+1.10 & Call \\
+1.20 & Call \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\paragraph{Discounting.} The risk-free rate is set to $r=0$, matching the
+risk-neutral drift $\mu=0$ used throughout the simulated data, so $S_t$
+is a martingale under both the true and the forecast measure and the
+three engines remain directly comparable.
+
+\paragraph{Oracle price.} Writing $\tau=l\Delta t$, the Heston
+characteristic function $\varphi(u)=\mathbb E[e^{iuX_{t+\tau}}\mid
+X_t,v_t]$ is inverted with a fractional FFT into a discretised density
+$f(x)$ of the terminal log-price.
+\[
+C^{\text{oracle}}(K)=e^{-r\tau}\int (e^{x}-K)^+ f(x)\,dx .
+\]
+
+Similarly for the put options with $K<S_t$:
+
+\[
+P^{\text{oracle}}(K)=e^{-r\tau}\int (K-e^{x})^+ f(x)\,dx
+\]
+
+During the rest of the discussion the notation $\hat C^{\text{°}}(K)$ will be used to refer to both call and put options, with the understanding that the payoff function is chosen according to the moneyness of the strike $K$.
+
+
+\paragraph{Heston Monte Carlo price.} $10{,}000$ terminal log-price draws
+per trajectory are simulated with the exact/QE CIR scheme already used
+in this thesis, started from $(X_t,v_t)$:
+\[
+\hat C^{\text{MC}}(K)=\frac{e^{-r\tau}}{N}\sum_{i=1}^N
+\left(e^{X_{t+\tau}^{(i)}}-K\right)^{+},\qquad
+\widehat{\text{se}}^{\text{MC}}(K)=\frac{e^{-r\tau}}{\sqrt N}\,
+\widehat{\mathrm{sd}}\!\left[\left(e^{X_{t+\tau}}-K\right)^{+}\right].
+\]
+
+
+\paragraph{GAN price.} The identical estimator is applied to $N=10{,}000$
+draws $\hat X_{t+\tau}^{(i)}\sim G_\phi(\cdot\mid\mathbf c)$ from the
+trained generator, conditioned only on the observed price window.
+Similarly to the Heston-MC case, the standard error of the GAN price is estimated as:
+\[
+\hat C^{\text{GAN}}(K)=\frac{e^{-r\tau}}{N}\sum_{i=1}^N
+\left(e^{X_{t+\tau}^{(i)}}-K\right)^{+},\qquad
+\widehat{\text{se}}^{\text{GAN}}(K)=\frac{e^{-r\tau}}{\sqrt N}\,
+\widehat{\mathrm{sd}}\!\left[\left(e^{X_{t+\tau}}-K\right)^{+}\right].
+\]
+
+\paragraph{Implied volatility.} Every price (oracle, MC, GAN) is
+converted into a Black--Scholes implied volatility $\sigma_{\text{impl}}$
+by Brent root-finding. By using this monotone re-parametrisation the prices errors are placed
+ on a scale comparable across strikes and that directly exposes smile-shape mismatches, which is the
+feature a stochastic-volatility model is specifically built to capture.
+
+\paragraph{Error and diagnostic metrics.} For each (trajectory, strike):
+price and IV errors of GAN vs.\ oracle, GAN vs.\ MC, and MC vs.\ oracle;
+and a $z$-score
+testing whether the GAN/MC price gap exceeds sampling noise. Separately,
+for each trajectory the first four empirical moments of the raw MC and
+GAN log-price samples (mean, standard deviation, skewness, excess
+kurtosis) are compared directly, to diagnose which feature of the
+distribution drives any pricing mismatch.\\
+
+Let $i=1,\dots,n$ ($n=2{,}100$) index the
+(trajectory, strike) pairs underlying Table~\ref{tab:overall}. For pair
+$i$, let $\hat C_i^{\text{oracle}}$, $\hat C_i^{\text{MC}}$,
+$\hat C_i^{\text{GAN}}$ denote the oracle, Heston-MC, and GAN prices, and
+$\hat\sigma_i^{\text{oracle}}$, $\hat\sigma_i^{\text{GAN}}$ the
+corresponding Black--Scholes implied volatilities. Define the residuals
+\[
+e_i = \hat C_i^{\text{GAN}}-\hat C_i^{\text{oracle}}, \qquad
+e_i^{\text{MC}} = \hat C_i^{\text{GAN}}-\hat C_i^{\text{MC}}, \qquad
+\varepsilon_i = \hat\sigma_i^{\text{GAN}}-\hat\sigma_i^{\text{oracle}},
+\]
+and the standardised price gap
+\[
+z_i = \frac{\hat C_i^{\text{GAN}}-\hat C_i^{\text{MC}}}
+{\sqrt{\big(\widehat{\text{se}}_i^{\text{GAN}}\big)^2+\big(\widehat{\text{se}}_i^{\text{MC}}\big)^2}},
+\]
+where $\widehat{\text{se}}_i^{\text{GAN}}$ and $\widehat{\text{se}}_i^{\text{MC}}$
+are the Monte Carlo standard errors of the GAN and Heston-MC price
+estimators defined in the "Heston Monte Carlo price"/"GAN price"
+paragraphs above, and $\mathbf 1\{\cdot\}$ is the indicator function.
+
+\subsection{Results}
+
+Table~\ref{tab:overall} reports the aggregate error statistics over all
+$J\times|\mathcal M|=2{,}100$ (trajectory, strike) pairs.
+Table~\ref{tab:moneyness} breaks these down by moneyness, and
+Table~\ref{tab:moments} compares the empirical moments of the GAN and
+Heston-MC terminal distributions.\\
+
+
+
+\begin{table}[H]
+\centering
+\small
+\caption{Aggregate pricing-error statistics ($J=300$ trajectories,
+$7$ strikes, $n=2{,}100$).}
+\label{tab:overall}
+\begin{tabular}{lcc}
+\toprule
+Metric & Formula & Value \\
+\midrule
+Bias, price vs.\ oracle          & $\dfrac1n\sum_i e_i$                                   & 0.0005 \\[1.2ex]
+\hline
+RMSE, price vs.\ oracle          & $\sqrt{\dfrac1n\sum_i e_i^2}$                         & 0.0312 \\[1.2ex]
+\hline
+WAPE, price vs.\ oracle           & $\frac{\sum \vert{}e_i\vert{}}{\sum C_i^{\text{oracle}}}$  & 0.3718 \\[1.2ex]
+\hline
+RMSE, price vs.\ Heston MC       & $\sqrt{\dfrac1n\sum_i \big(e_i^{\text{MC}}\big)^2}$    & 0.0311 \\[1.2ex]
+\hline
+WAPE, price vs.\ Heston MC        & $\frac{\sum \vert{}e_i^{MC}\vert{}}{\sum C_i^{\text{oracle}}}$             & 0.3731 \\[1.2ex]
+\hline
+Bias, implied vol.\ vs.\ oracle  & $\dfrac1n\sum_i \varepsilon_i$                         & 0.0045 \\[1.2ex]
+\hline
+RMSE, implied vol.\ vs.\ oracle  & $\sqrt{\dfrac1n\sum_i \varepsilon_i^2}$                & 0.3320 \\[1.2ex]
+\hline
+WAPE, implied vol.\ vs.\ oracle   & $\frac{\sum \vert{}\varepsilon_i\vert{}}{\sum \hat\sigma_i^{\text{oracle}}}$                      & 0.2601 \\[1.2ex]
+\hline
+Share of $|z_{\text{GAN vs.\ MC}}|>1.96$ & $\dfrac1n\sum_i \mathbf 1\{|z_i|>1.96\}$       & 91.3\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{Pricing-error statistics by moneyness $K/S_t$. \\(*** = $p<0.01$, ** = $p<0.05$, * = $p<0.1$).}
+\label{tab:moneyness}
+\begin{tabular}{lrrrr}
+\toprule
+$K/S_t$ & Bias, price & RMSE, IV & WAPE, IV & Bias, IV \\
+\midrule
+0.80 & $-0.0023$\text{***} & 0.2256 & 0.4696 & $-0.0574$\text{***}\\
+0.90 & $-0.0041$\text{***} & 0.2861 & 0.3494 & $-0.0534$\text{**} \\
+0.95 & $-0.0048$\text{**} & 0.3300 & 0.2961 & $-0.0517$\text{**} \\
+1.00 & $\phantom{-}0.0049$\text{*} & 0.2688 & 0.3557 & $\phantom{-}0.0662$\text{*} \\
+1.05 & $\phantom{-}0.0042$\text{**} & 0.3133 & 0.2951 & $\phantom{-}0.0541$\text{*} \\
+1.10 & $\phantom{-}0.0035$\text{**} & 0.3679 & 0.2522 & $\phantom{-}0.0432$\text{**} \\
+1.20 & $\phantom{-}0.0021$\text{***} & 0.4851 & 0.1985 & $\phantom{-}0.0303$\text{***} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{GAN vs.\ Heston-MC terminal log-price moments (bias
+$=\text{GAN}-\text{MC}$, averaged over $J=300$ trajectories; correlation
+across trajectories).}
+\label{tab:moments}
+\begin{tabular}{lrrr}
+\toprule
+Moment & Bias & WAPE & Correlation \\
+\midrule
+Mean               & 0.0095  & 0.0516 & 0.998 \\
+Std.\ deviation     & $-0.0103$ & 0.101 & 0.814 \\
+Skewness            & 0.0725  & 0.4964 & $-0.099$ \\
+Excess kurtosis     & 0.1078  & 1.5267 & 0.374 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The oracle and Heston-MC benchmarks agree closely with each other, both
+in aggregate (RMSE $0.0312$ vs.\ $0.0311$) and at every moneyness level;
+this confirms the two ground-truth routes are mutually consistent, so
+essentially all the reported GAN discrepancy reflects genuine
+distributional error rather than benchmark disagreement. The aggregate
+price bias is small ($0.0005$), but Table~\ref{tab:moneyness} shows this
+is the average of a sign-flipping pattern: prices are systematically
+\emph{below} the oracle for $K<S_t$ (puts) and \emph{above} it for
+$K\ge S_t$ (calls), with the effect largest near the money. For $91.3\%$
+of (trajectory, strike) pairs the GAN/MC price gap exceeds what sampling
+noise alone would explain at the $95\%$ level ($|z|>1.96$), so the
+mismatch is not an artefact of Monte Carlo variance. 
+Moreover, for each moneyness level the bias in the prices and in the implied volatilities is statistically significant at least at the $10\%$ confidence level.\\
+
+Table~\ref{tab:moments} identifies the mechanism. The GAN reproduces the
+trajectory-conditional \emph{mean} of the terminal log-price almost
+perfectly (correlation $0.998$) and the \emph{standard deviation}
+reasonably well (correlation $0.814$), but shows essentially no
+association with the true \emph{skewness} ($-0.099$) or \emph{kurtosis}
+($0.374$) across trajectories. A small positive mean bias ($+0.0095$,
+under $10\%$ of one standard deviation at this horizon) shifts the whole
+distribution to the right, mechanically depressing put prices and
+inflating call prices, exactly the sign pattern observed. The
+Heston leverage effect ($\rho=-0.7$) induces genuine, trajectory-specific
+negative skew in $P^\star$; since the GAN does not track skewness
+across regimes, its implied smile comes out flatter and less negatively
+skewed than the truth, which is precisely why implied-volatility errors
+are largest at the money (where price is most sensitive to dispersion
+and to skew-driven asymmetry) and shrink towards both wings, rather than
+following the pattern of noisier deep-OTM/ITM inversion that one might
+otherwise expect. A plausible contributing cause is that Energy-Score
+training here used only $n_{\text{samples}}=10$ generator draws per
+gradient step: mean and variance are estimated far more precisely than
+skewness or kurtosis at that sample size, so the training signal is
+inherently weaker for exactly the moments found deficient here. 
+In addition, no hyperparameter tuning was performed to improve the GAN's ability to capture higher-order moments.
+
+
+
+\chapter{Conclusion}
+
+This thesis proposes to test and evaluate whether generative adversarial networks,
+and their adversarial-free variant, can be used to learn the conditional distribution of a financial time series.
+The proposed scoring rule based final model, named SRForGAN, has been tested to check its capabilities to learn the
+forecast distribution of a financial time series accurately enough to be
+useful, moving progressively from Geometric Brownian Motion to the
+stochastic-volatility Heston model, and ultimately evaluating the learned
+distributions in a concrete option pricing task.\\
+
+The results consistently favour the proposed approach over its
+GAN-based alternatives. Under Black--Scholes dynamics, the vanilla ForGAN
+trained with the BCE loss struggled visibly (25\% KS acceptance,
+Jensen--Shannon distance $\approx0.49$), the Wasserstein variant improved
+matters but remained far from satisfactory (34\% KS acceptance,
+JS $\approx0.28$), while SRForGAN, trained by minimising the Energy
+Score, with no critic and no adversarial game, matched the analytical
+Gaussian benchmark almost exactly (99\% KS acceptance, JS $\approx0.14$).
+This gap is the central practical advantage demonstrated throughout the
+thesis: replacing the adversarial min-max objective with a strictly proper
+scoring rule removes the well-known instability and mode-collapse
+tendencies of GAN training, at no cost in distributional accuracy and, in
+this setting, at a considerable gain. The same architecture and training
+recipe then transferred, with only a modest and expected drop in
+performance, to the substantially harder Heston setting: 87.5\% KS
+acceptance with fixed parameters, and 82--83\% once $\kappa$, $\theta$,
+$\sigma_v$ and $\rho$ were all allowed to vary across trajectories, showing
+that a single trained generator can reasonably generalise across a family
+of volatility regimes rather than requiring re-estimation for each one,
+which is precisely the property one would want from a model intended for
+practical deployment. The machine-epsilon-level validation of the frFFT
+inversion pipeline further ensures that all of these comparisons rest on a
+numerically trustworthy Heston benchmark rather than on an artefact of the
+evaluation code itself.
+
+The pricing-based validation introduced in the final chapter is arguably
+the thesis's most informative contribution, precisely because it complicates
+this otherwise positive picture. Distributional distances such as KS,
+Jensen--Shannon, Hellinger and Total Variation are dominated by the bulk of
+the distribution and, as such, rewarded SRForGAN generously. Pricing a
+volatility smile, by contrast, is disproportionately sensitive to exactly
+the features that live in the tails and in the asymmetry of the
+distribution. The moment diagnostics make the mechanism explicit: the
+generator reproduces the trajectory-conditional mean of the terminal
+log-price almost perfectly (correlation $0.998$) and the standard deviation
+well (correlation $0.814$), but shows essentially no ability to track
+skewness ($-0.189$) or excess kurtosis ($0.264$) across the different Heston
+regimes. Since the leverage effect ($\rho=-0.7$) is precisely what endows
+the true distribution with a regime-dependent negative skew, its absence in
+the generated distribution produces a smile that is systematically flatter
+than the truth, with a statistically significant bias (at worst $p<0.001$)
+that underprices out-of-the-money puts and overprices out-of-the-money
+calls. In other words, a model that looks close to indistinguishable from
+the ground truth under generic distributional metrics can still be
+economically unsuitable for a skew-sensitive financial application, a
+distinction that only becomes visible once the forecast is stress-tested
+against the task it is meant to serve, and one that future generative
+forecasting work in finance should not overlook.
+
+This shortcoming also delineates the clearest avenues for future work.
+Training used only ten Monte Carlo draws per gradient step to estimate the
+Energy Score, a sample size sufficient to estimate a mean or a variance
+precisely but a considerably weaker basis for estimating skewness or
+kurtosis; whether increasing this sample size, or adopting a scoring rule
+more explicitly sensitive to higher-order moments (for instance a variogram
+score or a weighted combination of scoring rules), closes this gap is a
+natural and immediately testable next step, since no hyperparameter tuning
+was directed at this issue in the present work. Likewise, the generator was
+deliberately restricted to conditioning on the observed price history
+alone, mirroring realistic deployment where the instantaneous variance is
+unobservable; enriching the conditioning set with realised-volatility
+proxies, extending the analysis to longer horizons and more extreme
+parameter regimes, and testing the same pricing-based methodology on other
+volatility models are all promising directions building directly on the
+framework developed here.

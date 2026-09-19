@@ -1186,9 +1186,9 @@ Before using any scoring rule as a training loss, \cite{srforgan:srforgan} and \
 \begin{enumerate}
     \label{ES_conditions}
 \item $\beta\in(0,2)$: the negative-power kernel $k(x,y)=-\|x-y\|^\beta$ is (conditionally) strictly positive-definite only in this range, which is what makes $S_E^{(\beta)}$ \ref{eq:energy_score} strictly proper rather than merely proper.
-\item Finite $\beta$-th moments: $\mathbb{E}_{Y\sim P^\star}\|Y\|^\beta<\infty$ and $\mathbb{E}_{X\sim P^\phi}\|X\|^\beta<\infty$, without this the score, and hence the objective, need not even be finite.
+\item Finite $\beta$-th moments: $\mathbb{E}_{Y\sim P^\star}\|Y\|^\beta<\infty$ and $\mathbb{E}_{X\sim P^\phi}\|X\|^\beta<\infty$, without this the score, and hence the objective, is not even be finite.
 \item A \emph{well-specified} unbiased estimator of the population scoring rule.
-\item I.i.d.\ training pairs $(c_j,y_j)\sim\Pi\times P^\star(\cdot|c)$ 
+\item i.i.d.\ training pairs $(c_j,y_j)\sim\Pi\times P^\star(\cdot|c)$ 
 \item A generator admitting the reparameterisation trick, $X=G_\phi(z,c)$, $z\sim\mathcal N(0,I)$, differentiable in $\phi$, so $\nabla_\phi S_E$ can be estimated unbiasedly (App.~C, \cite{srforgan:srforgan}).
 \end{enumerate}
 The discussion and proofs of these conditions are met in out setting are provided in the appendix \ref{ch:condition_proofs}.\\

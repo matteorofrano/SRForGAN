@@ -1,26 +1,24 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Standard GAN architecture}}{10}{figure.2.1}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces ForGAN building blocks}}{20}{figure.2.2}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces ForGAN architecture}}{21}{figure.2.3}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Standard GAN architecture}}{11}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces ForGAN building blocks}}{21}{figure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces ForGAN architecture}}{22}{figure.2.3}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces SRForGAN training schema. The generator takes a noise vector and a conditioning variable to produce a forecast distribution, which is then scored against the true observation using the Energy Score. The critic is not used in this architecture, as the adversarial loss is replaced by the scoring rule objective.}}{34}{figure.3.1}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces SRForGAN training schema. The generator takes a noise vector and a conditioning variable to produce a forecast distribution, which is then scored against the true observation using the Energy Score. The critic is not used in this architecture, as the adversarial loss is replaced by the scoring rule objective.}}{35}{figure.3.1}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Samples obtained using fixed $X_0$, $\mu $ and $\sigma = 0.5$.}}{45}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Samples obtained using fixed $X_0$, $\mu $ and $\sigma = 0.5$.}}{46}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Samples obtained using fixed $X_0$ and $\mu $ while varying $\sigma = [0.3, 0.5, 0.7, 0.9]$.}}{48}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Samples obtained using fixed $X_0$ and $\mu $ while varying $\sigma = [0.3, 0.5, 0.7, 0.9]$.}}{50}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Samples obtained using fixed $X_0$, $\mu $ and $\sigma = [0.3, 0.5, 0.7, 0.9]$.}}{52}{figure.4.5}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Samples obtained using fixed $X_0$, $\mu $ and $\sigma = [0.3, 0.5, 0.7, 0.9]$.}}{53}{figure.4.6}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Samples obtained using fixed $X_0$, $\mu $ and $\sigma = [0.3, 0.5, 0.7, 0.9]$.}}{55}{figure.4.7}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Samples obtained using fixed $X_0$ and $\mu $ while varying $\sigma = [0.3, 0.5, 0.7, 0.9]$.}}{47}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Samples obtained using fixed $X_0$ and $\mu $ while varying $\sigma = [0.3, 0.5, 0.7, 0.9]$.}}{49}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Samples obtained using fixed $X_0$, $\mu $ and $\sigma = [0.3, 0.5, 0.7, 0.9]$.}}{51}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Samples obtained using fixed $X_0$, $\mu $ and $\sigma = [0.3, 0.5, 0.7, 0.9]$.}}{52}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Samples obtained using fixed $X_0$, $\mu $ and $\sigma = [0.3, 0.5, 0.7, 0.9]$.}}{54}{figure.4.5}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Comparison of the Heston PDF obtained via the frFFT method (red line) and the Monte Carlo estimator (blue histogram) for four sample trajectories. }}{66}{figure.5.1}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Comparison of the frFFT-recovered density (red dashed) and the analytical Gaussian (blue) for four randomly sampled trajectories.}}{70}{figure.5.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Pointwise residuals between the normalised frFFT density and the analytical Gaussian density, evaluated at the active fine-grid points within $\pm 5\sigma $ of each trajectory's mean. The vertical axes carry exponents of $1^{-15}$, confirming that the residuals are at the level of double-precision machine epsilon.}}{71}{figure.5.3}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Samples obtained using fixed $x_0$, $\mu $, $v_0$, $\theta $, $\kappa $, $\sigma _v$, $\rho $.}}{76}{figure.5.4}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Samples obtained using fixed $x_0$, $\mu $, $v_0$, $\theta $, $\kappa $, $\sigma _v$, $\rho $.}}{77}{figure.5.5}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Samples obtained using fixed $x_0$, $\mu $, $v_0$, $\theta $, $\kappa $, $\rho $ and variable $\sigma _v$}}{80}{figure.5.6}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Samples obtained using fixed $x_0$, $\mu $, $v_0$, but different $\theta $, $\kappa $, $\rho $ and $\sigma _v$}}{81}{figure.5.7}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Comparison of the Heston PDF obtained via the frFFT method (red line) and the Monte Carlo estimator (blue histogram) for four sample trajectories. }}{65}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Comparison of the frFFT-recovered density (red dashed) and the analytical Gaussian (blue) for four randomly sampled trajectories.}}{69}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Pointwise residuals between the normalised frFFT density and the analytical Gaussian density, evaluated at the active fine-grid points within $\pm 5\sigma $ of each trajectory's mean. The vertical axes carry exponents of $1^{-15}$, confirming that the residuals are at the level of double-precision machine epsilon.}}{70}{figure.5.3}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Samples obtained using fixed $x_0$, $\mu $, $v_0$, $\theta $, $\kappa $, $\sigma _v$, $\rho $.}}{75}{figure.5.4}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Samples obtained using fixed $x_0$, $\mu $, $v_0$, $\theta $, $\kappa $, $\rho $ and variable $\sigma _v$}}{78}{figure.5.5}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Samples obtained using fixed $x_0$, $\mu $, $v_0$, but different $\theta $, $\kappa $, $\rho $ and $\sigma _v$}}{79}{figure.5.6}%
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

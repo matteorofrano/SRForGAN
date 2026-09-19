@@ -3,31 +3,31 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces ForGAN Architecture and Hyperparameters Summary}}{45}{table.4.1}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Evaluation metrics rounded to four decimal places}}{45}{table.4.2}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces ForWGAN Architecture and Hyperparameters Summary}}{46}{table.4.3}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Evaluation metrics rounded to four decimal places}}{46}{table.4.4}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces ForGAN Architecture and Hyperparameters Summary}}{47}{table.4.5}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces ForGAN performance metrics averaged over 1000 samples}}{48}{table.4.6}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces ForWGAN Architecture and Hyperparameters Summary}}{49}{table.4.7}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces ForWGAN performance metrics averaged over 1000 samples}}{49}{table.4.8}%
-\contentsline {table}{\numberline {4.9}{\ignorespaces Generator Architecture and Hyperparameters Summary}}{51}{table.4.9}%
-\contentsline {table}{\numberline {4.10}{\ignorespaces Evaluation metrics rounded to four decimal places}}{51}{table.4.10}%
-\contentsline {table}{\numberline {4.11}{\ignorespaces ForGAN Architecture and Hyperparameters Summary}}{52}{table.4.11}%
-\contentsline {table}{\numberline {4.12}{\ignorespaces Evaluation metrics rounded to four decimal places}}{53}{table.4.12}%
-\contentsline {table}{\numberline {4.13}{\ignorespaces ForWGAN Architecture and Hyperparameters Summary}}{54}{table.4.13}%
-\contentsline {table}{\numberline {4.14}{\ignorespaces Evaluation metrics rounded to four decimal places}}{54}{table.4.14}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces ForGAN Architecture and Hyperparameters Summary}}{46}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces ForGAN performance metrics averaged over 100000 samples}}{47}{table.4.2}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces ForWGAN Architecture and Hyperparameters Summary}}{48}{table.4.3}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces ForWGAN performance metrics averaged over 100000 samples}}{48}{table.4.4}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Generator Architecture and Hyperparameters Summary}}{50}{table.4.5}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Evaluation metrics rounded to four decimal places}}{50}{table.4.6}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces ForGAN Architecture and Hyperparameters Summary}}{51}{table.4.7}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Evaluation metrics rounded to four decimal places}}{52}{table.4.8}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces ForWGAN Architecture and Hyperparameters Summary}}{53}{table.4.9}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Evaluation metrics rounded to four decimal places}}{53}{table.4.10}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Step A: comparison between directly computed analytical parameters and those returned by code simulation for the first 4 trajectories. All differences are zero to double-precision.}}{68}{table.5.1}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Step B: moment accuracy of the frFFT-recovered density for the first 4 trajectories. The frFFT mean matches the analytical mean to within $\approx 10^{-7}$ and the standard deviation to within $\approx 10^{-7}$.}}{69}{table.5.2}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Heston parameters}}{73}{table.5.3}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Generator Architecture and Hyperparameters Summary}}{75}{table.5.4}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Distribution comparison metrics}}{75}{table.5.5}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces Conditional mean consistency. $\hat {\mu }_{\mathrm {true}}$ and $\hat {\mu }_{\mathrm {gen}}$ are the empirical means of the Monte Carlo ground truth and of the generated distribution, respectively. $|\Delta _{\mathrm {true}}|=|\hat {\mu }_{\mathrm {true}}-\mu _{\mathrm {th}}|$, $|\Delta _{\mathrm {gen}}|=|\hat {\mu }_{\mathrm {gen}}-\mu _{\mathrm {th}}|$.}}{78}{table.5.6}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces Conditional standard deviation consistency. $\sigma _{\mathrm {th}} = \sqrt {\mathbb {E}[\DOTSI \intop \ilimits@ _0^\tau v_s\,ds]}$; $\hat {\sigma }_{\mathrm {true}}$ and $\hat {\sigma }_{\mathrm {gen}}$ are the empirical standard deviations of the true and generated distributions.}}{78}{table.5.7}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces Heston parameters vol-of-vol}}{79}{table.5.8}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces Distribution comparison metrics}}{79}{table.5.9}%
-\contentsline {table}{\numberline {5.10}{\ignorespaces Heston with all variable parameters}}{80}{table.5.10}%
-\contentsline {table}{\numberline {5.11}{\ignorespaces Distribution comparison metrics}}{81}{table.5.11}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Step A: comparison between directly computed analytical parameters and those returned by code simulation for the first 4 trajectories. All differences are zero to double-precision.}}{67}{table.5.1}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Step B: moment accuracy of the frFFT-recovered density for the first 4 trajectories. The frFFT mean matches the analytical mean to within $\approx 10^{-7}$ and the standard deviation to within $\approx 10^{-7}$.}}{68}{table.5.2}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Heston parameters}}{72}{table.5.3}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Generator Architecture and Hyperparameters Summary}}{74}{table.5.4}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Distribution comparison metrics}}{74}{table.5.5}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Conditional mean consistency. $\hat {\mu }_{\mathrm {true}}$ and $\hat {\mu }_{\mathrm {gen}}$ are the empirical means of the Monte Carlo ground truth and of the generated distribution, respectively. $|\Delta _{\mathrm {true}}|=|\hat {\mu }_{\mathrm {true}}-\mu _{\mathrm {th}}|$, $|\Delta _{\mathrm {gen}}|=|\hat {\mu }_{\mathrm {gen}}-\mu _{\mathrm {th}}|$.}}{76}{table.5.6}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Conditional standard deviation consistency. $\sigma _{\mathrm {th}} = \sqrt {\mathbb {E}[\DOTSI \intop \ilimits@ _0^\tau v_s\,ds]}$; $\hat {\sigma }_{\mathrm {true}}$ and $\hat {\sigma }_{\mathrm {gen}}$ are the empirical standard deviations of the true and generated distributions.}}{76}{table.5.7}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Heston parameters vol-of-vol}}{77}{table.5.8}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Distribution comparison metrics}}{77}{table.5.9}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Heston with all variable parameters}}{78}{table.5.10}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces Distribution comparison metrics}}{79}{table.5.11}%
+\contentsline {table}{\numberline {5.12}{\ignorespaces Aggregate pricing-error statistics ($J=300$ trajectories, $7$ strikes, $n=2{,}100$).}}{82}{table.5.12}%
+\contentsline {table}{\numberline {5.13}{\ignorespaces Pricing-error statistics by moneyness $K/S_t$. \\(*** = $p<0.01$, ** = $p<0.05$, * = $p<0.1$).}}{83}{table.5.13}%
+\contentsline {table}{\numberline {5.14}{\ignorespaces GAN vs.\ Heston-MC terminal log-price moments (bias $=\text {GAN}-\text {MC}$, averaged over $J=300$ trajectories; correlation across trajectories).}}{83}{table.5.14}%
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

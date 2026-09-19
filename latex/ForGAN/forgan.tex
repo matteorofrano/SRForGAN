@@ -159,108 +159,6 @@ After having obtained $D$ from \ref{alg:mc_terminal_dist} and having computed th
 the two distributions can be compared by using all the metrics described in \ref{sec:performance_metrics} like Jensen-Shannon divergence, Wasserstein distance, Total Variation distance and statistical tests like the Kolmogorov-Smirnov test.
 
 
-\section{ForGAN results with fixed volatility trajectories}
-In the following section a simplified version of the problem is discussed.
-In particular, here the condition vector is given by Geometric Brownian Motion trajectories
-obtained from the same volatility parameter $\sigma = 0.5$, by using the procedure described in algorithm \ref{alg:y condition},
-which will be constant for all 
-the trajectories.
-The goal of this experiment is to understand if the proposed ForGAN architecture is able to capture the variance and mean of the target distribution when the volatility is fixed for all trajectories.
-
-Below are presented the architecture and metrics results for the simple ForGAN architecture:
-\begin{table}[H] 
-\centering
-\caption{ForGAN Architecture and Hyperparameters Summary}
-\label{tab:forgan_debug_architecture}
-\begin{tabular}{lll}
-\hline
-\textbf{Parameter}         & \textbf{Generator}          & \textbf{Critic (Discriminator)} \\ \hline
-Input Dimension            & 64 (Latent) + 252 (Cond.)   & 1 (Data) + 252 (Cond.)          \\
-Hidden Layers              & [512, 256, 128, 64]         & [512, 256, 256, 128, 64]        \\
-Output Dimension           & 1                           & 1                               \\
-Activation Function        & ReLU                        & Leaky ReLU                      \\
-Normalization              & Batch Norm                  & None                      \\
-Dropout                    & 0.0                         & 0.0                             \\
-\multicolumn{3}{c}{\textbf{Global Training Settings}}                                     \\ \hline
-Max Epochs                 & \multicolumn{2}{l}{100}                                       \\
-Learning Rate              & \multicolumn{2}{l}{0.0001}                                      \\
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{l c}
-\hline
-\textbf{Metric} & \textbf{Value} \\
-\hline
-\label{tab:forgan_debug_results}
-KS Test Acceptance (\%) & 1.0000 \\
-JS Distance & 0.1757 \\
-Hellinger Distance & 0.1520 \\
-TV Distance & 0.1440 \\
-EMD Distance & 0.0049 \\
-\hline
-\end{tabular}
-\caption{Evaluation metrics rounded to four decimal places}
-\end{table}
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{Background/images/debug_forgan.png}
-    \caption{Samples obtained using fixed $X_0$, $\mu$ and $\sigma = 0.5$.}
-    \label{forgan_debug_sample}
-\end{figure}
-
-
-Also the results from the ForWGAN architecture with the same simplified setup are shown below:
-
-\begin{table}[H] 
-\centering
-\caption{ForWGAN Architecture and Hyperparameters Summary}
-\label{tab:forwgan_debug_architecture}
-\begin{tabular}{lll}
-\hline
-\textbf{Parameter}         & \textbf{Generator}          & \textbf{Critic (Discriminator)} \\ \hline
-Input Dimension            & 64 (Latent) + 252 (Cond.)   & 1 (Data) + 252 (Cond.)          \\
-Hidden Layers              & [512, 256, 128, 64]         & [512, 256, 256, 128, 64]        \\
-Output Dimension           & 1                           & 1                               \\
-Activation Function        & ReLU                        & Leaky ReLU                      \\
-Normalization              & None                        & Layer Norm                      \\
-Dropout                    & 0.0                         & 0.0                             \\
-\multicolumn{3}{c}{\textbf{Global Training Settings}}                                     \\ \hline
-Max Epochs                 & \multicolumn{2}{l}{100}                                        \\
-Learning Rate              & \multicolumn{2}{l}{0.0001}                                      \\
-\end{tabular}
-\end{table}
-
-
-\begin{table}[h]
-\centering
-\begin{tabular}{l c}
-\hline
-\textbf{Metric} & \textbf{Value} \\
-\hline
-\label{tab:forwgan_debug_results}
-KS Test Acceptance (\%) & 1.0000 \\
-JS Distance & 0.1493 \\
-Hellinger Distance & 0.1301 \\
-TV Distance & 0.1193 \\
-EMD Distance & 0.0036 \\
-\hline
-\end{tabular}
-\caption{Evaluation metrics rounded to four decimal places}
-\end{table}
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{Background/images/debug_forwgan.png}
-    \caption{Samples obtained using fixed $X_0$, $\mu$ and $\sigma = 0.5$.}
-    \label{forwgan_debug_sample}
-\end{figure}
-
-
 \section{ForGAN results with variable volatility trajectories}
 \label{sec:bs experiment}
 The following setup for the experiments has been used:\\
@@ -302,9 +200,9 @@ Max Epochs                 & \multicolumn{2}{l}{100}                            
 \end{tabular}
 \end{table}
 
-The Kolmogorov-Smirnov test performed on 10000 real and generated bins probabilities shows that
-the resulting p-values are accepted 48\% of time.\\
-Moreover, the average Jensen-Shannon divergence over the 1000 samples is around 0.49,
+The Kolmogorov-Smirnov test performed on 100000 real and generated probability distributions shows that
+the resulting p-values are accepted 25\% of time.\\
+Moreover, the average Jensen-Shannon divergence over the test samples is around 0.49,
 suggesting poor performance since the Jensen-Shannon divergence computed by using the logarithm in base 2
 is bounded in the range $[0, 1]$.
 
@@ -314,16 +212,17 @@ is bounded in the range $[0, 1]$.
 \hline
 \textbf{Metric} & \textbf{Value} \\
 \hline
-EMD Distance & 0.0255 \\
+KS Test Acceptance (\%) & 25.00 \\
+EMD Distance & 0.00855 \\
 JS Distance & 0.4378 \\
 Hellinger Distance & 0.4001 \\
 TV Distance & 0.4129 \\
 \hline
 \end{tabular}
-\caption{ForGAN performance metrics averaged over 1000 samples}
+\caption{ForGAN performance metrics averaged over 100000 samples}
 \end{table}
 
-These results strongly suggest trying to improve the performances of the proposed ForGAN by adopting the Wasserstein distance instead of the BCE loss.\\
+These results strongly suggest that it is worth trying to improve the performances of the proposed ForGAN by adopting the Wasserstein distance instead of the BCE loss.\\
 In order to visually assess the capabilities of the model,
 different samples have been drawn such that every sampling parameter is fixed except for the volatility $\sigma$.
 In particular, six different samples are shown below where
@@ -364,22 +263,23 @@ Learning Rate              & \multicolumn{2}{l}{0.0005}                         
 \end{table}
 
 
-The Kolmogorov-Smirnov test performed on 10000 real and generated bins probabilities shows that
-the resulting p-values are accepted 56\% of times, significantly higher than the ForGAN proposed models.\\
-Moreover, the average Jensen-Shannon divergence over the 1000 samples is around 0.35 which highlights an improvement with respect to the ForGAN model.\\
+The Kolmogorov-Smirnov test performed on 100000 real and generated probability distributions shows that
+the resulting p-values are accepted 34\% of times, quite higher than the ForGAN proposed models but still far from the desired level.\\
+Moreover, the average Jensen-Shannon divergence over the test samples is around 0.28 which highlights an improvement with respect to the ForGAN model.\\
 \begin{table}[h]
 \centering
 \begin{tabular}{l c}
 \hline
 \textbf{Metric} & \textbf{Value} \\
 \hline
-EMD distance & 0.0180 \\
-JS Distance & 0.3402 \\
-Hellinger Distance & 0.3110 \\
-TV Distance & 0.3239 \\
+KS Test Acceptance (\%) & 34.00 \\
+EMD distance & 0.00380 \\
+JS Distance & 0.2802 \\
+Hellinger Distance & 0.2510 \\
+TV Distance & 0.2539 \\
 \hline
 \end{tabular}
-\caption{ForWGAN performance metrics averaged over 1000 samples}
+\caption{ForWGAN performance metrics averaged over 100000 samples}
 \end{table}
 
 

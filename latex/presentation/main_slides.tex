@@ -1,0 +1,114 @@
+\documentclass[10pt]{beamer}
+
+%----------------------------------------------------------------------------------------
+%   PACKAGES AND CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath, amssymb}
+\usepackage{lipsum}
+\usepackage{multirow}
+\usepackage{booktabs}
+
+% Optional: remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Optional theme
+\usetheme{Madrid}
+
+%----------------------------------------------------------------------------------------
+%   TITLE PAGE FROM PROVIDED CONTENT
+%----------------------------------------------------------------------------------------
+
+\title[]{}
+\author[]{}
+\date[]{}
+
+%----------------------------------------------------------------------------------------
+%   DOCUMENT
+%----------------------------------------------------------------------------------------
+
+
+%---Bottom title 
+
+\definecolor{unipi}{RGB}{0,100,200}   % example deep blue
+\setbeamercolor{footlinecolor}{bg=unipi, fg=white}
+
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=3ex,dp=1.5ex,center]{footlinecolor}%
+      Matteo Rofrano
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=3ex,dp=1.5ex,center]{footlinecolor}%
+      MSc in Data Science and Business Informatics
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=3ex,dp=1.5ex,center]{footlinecolor}%
+      December 04, 2025
+    \end{beamercolorbox}%
+  }%
+}
+
+
+
+
+%--- TITLE
+\setbeamercolor{frametitlebox}{bg=unipi, fg=white}
+\setbeamercolor{frametitle}{bg=unipi, fg=white}
+
+%--- table of content
+\AtBeginSection[]{
+  \begin{frame}{Agenda}
+    \tableofcontents[currentsection, hideothersubsections]
+  \end{frame}
+}
+
+
+\begin{document}
+
+%----------------------------------------------------
+% Custom Title Page as Provided
+%----------------------------------------------------
+\begin{frame}
+\begin{beamercolorbox}[rounded=true, center, sep=1ex, wd=\textwidth]{frametitlebox}
+    \usebeamerfont{frametitle}
+    Interpretable Deep Learning Model\\
+    for Realized Volatility Forecasting
+  \end{beamercolorbox}
+
+\vspace{5mm}
+
+\begin{figure}[!htb]
+    \centering
+    \IfFileExists{frontespizio.jpg}{\includegraphics[keepaspectratio=true,scale=0.20]{frontespizio.jpg}}{\fbox{\parbox{0.8\textwidth}{\centering Logo not found: frontespizio.jpg}}}
+\end{figure}
+
+\begin{center}
+    \LARGE{Matteo Rofrano}\\
+    \vspace{3mm}
+    \Large{MSc in Data Science and Business Informatics}
+
+    \vspace{5mm}
+
+    \large{04/12/2025}
+\end{center}
+
+\vspace{5mm}
+
+
+
+
+\end{frame}
+
+%----------------------------------------------------
+% Example Content Frames
+%----------------------------------------------------
+
+\include{slides/slide_intro}
+\include{slides/slide_models}
+\include{slides/slide_data}
+\include{slides/slide_results}
+
+\end{document}

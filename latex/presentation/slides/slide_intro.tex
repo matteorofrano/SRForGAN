@@ -1,0 +1,146 @@
+\section{Introduction}
+
+
+
+\begin{frame}{Research Objective}
+\begin{itemize}
+    \item An efficient and robust estimator of the realized volatility is presented. 
+    This estimator, in contrast with classical theory, exploits just cheaper daily information.
+    \vspace{5mm} 
+    \item An advanced LSTM architecture with mixture of attention mechanism is introduced 
+    allowing for interpretable predictions by providing temporal-wise and variable-wise information.
+    \vspace{5mm}
+    \item In order to improve predictive performance a stacking ensemble which combines a classical HAR model
+    and the Interpretable LSTM is tested.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Why deep learning interpretability?}
+\begin{itemize}
+    \item Realized volatility (RV) is a measure of uncertainty and risk on financial markets.
+     It is not directly observable.   
+    \vspace{5mm} 
+    \item RV is adopted in highly regulated sectors like risk management and asset management 
+    \vspace{5mm}
+    \item eXplainable Artificial Intelligence (XAI) aims to provide insigths about black-box's predictions
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Stylized facts of Realized Volatility}
+    
+    Econometrics literature provides different stylized facts about Realized Volatility.
+    The most important are:
+    \vspace{5mm}
+    \begin{itemize}
+        \item Volatility clustering: volatility remains high or low for long periods. %but eventually reverts toward a long-run level.
+        \vspace{3mm}
+        \item Long-memory: realized volatility exhibits slow decay in autocorrelations.
+         \vspace{3mm}
+        \item Leverage effect: negative returns shows higher impact on future volatility.
+        \vspace{3mm}
+        \item Non-Gaussian distribution: realized volatility is skewed and heavy-tailed.
+        \vspace{3mm}
+        \item Weekend effect: volatility is usually higher on Monday with respect to Friday.
+    \end{itemize} 
+
+
+\end{frame}
+    
+
+
+\begin{frame}{Realized volatility estimator}
+    Starting from a simple log-price stochastic process described by the following Stochastic Differential Equation on a filtered probability space 
+$(\Omega,\mathcal F,\{\mathcal F_t\},\mathbb P)$:
+\begin{equation}
+    \label{eq:SDE}
+    \begin{aligned}
+        P_t = & P_0 + \int_0^t \mu_s\,ds \;+\; \int_0^t \sigma_s\,dW_s\\
+        dP_t = &  \mu_t dt + \sigma_t dW_t
+    \end{aligned}
+\end{equation}
+
+where $p_0$ is a starting price, $\mu_t$ is the drift term, $\sigma_t$ is the diffusion term and $W_t \sim \mathcal{N}(0, t)$ is a standard Wiener process.
+In this case the realized volatility corresponds to the Integrated Variance $IV_t = \int_{t-1}^t \sigma^2_s ds$.
+
+\vspace{5mm}
+
+In a more realistic framework jumps components need to be considered into the SDE, denoted by an additional term $J_t dQ_t$ with $Q_t$ a Poisson process.
+In this case the Realized Volatility is captured by the Quadratic variation over some time partition $\Pi=[0=t_0, t_1, ..., t_k, ...,  t_n=T]$ 
+\begin{equation}
+    {\displaystyle Q[P]_{t}=\lim _{\Vert \Pi\Vert \rightarrow 0}\sum _{k=1}^{n}(P_{t_{k}}-P_{t_{k-1}})^{2}}
+\end{equation}
+\end{frame}
+
+
+\begin{frame}{Realized volatility estimator}
+Authors in have proposed a range based estimator of the Realized Volatility that exploits daily price information only like:
+the open price $O_t$, the highest $H_t$, the closing price $C_t$, the lowest price $L_t$.
+Given some intermediate components:
+\begin{itemize}
+    \item $c_t = ln(C_t) - ln(O_t)$ price oscillation from the start to end value of the day.
+    \item $h_t = ln(H_t) - ln(O_t)$ price oscillation of the highest value from the opening one. 
+    \item $l_t = ln(L_t) - ln(O_t)$ price oscillation of the lowest value from the opening one.
+    \item $j_t = ln(O_t) - ln(C_{t-1})$ price oscillation of the current opening value from the last closed session.
+\end{itemize}
+
+
+
+
+\begin{equation}
+  \label{eq:rv_estimators}
+  \begin{aligned}
+    & PK_t = \frac{(h_t - l_t)^2}{4ln2} \qquad \hspace{6.9cm} \text{Parkinson,1980}\\
+    &GK_t = 0.511(h_t - l_t)^2 - 0.019(c_t(h_t + l_t)-2h_t l_t) - 0.383c_t^2 \quad {Garman\&Klass,1980}\\
+    &RS_t = h_t(h_t - c_t) + l_t(l_t - c_t) \qquad \hspace{4.0cm} \text{Rogers\&Satchell,1991}
+  \end{aligned}
+\end{equation}
+
+
+\end{frame}
+
+
+\begin{frame}{Realized volatility estimator}
+Before computing the RV estimator a winsorization procedure is applied to each estimator component.
+The proposed estimator is composed by 2 parts: 
+\begin{itemize}
+    \item The intraday price variation $\hat{RV_t} = \frac{PK_t + GK_t + RS_t}{3}$
+    \item The overnight price variation $j_t^2 = (ln(O_t) - ln(C_{t-1}))^2$
+\end{itemize}
+
+Finally, the Realized Volatility estimator $RV_t = w_1 j_t^2 + w_2 \hat{RV_t}$ is obtained from the following minimization problem:
+\begin{equation}
+  \label{eq:opt_rv}
+  \begin{aligned}
+    &\textit{min}_{\omega \in \Omega}  \operatorname{VAR}[RV_t(\omega)] \\
+    \textbf{is solved by: } & w_1^* = (1-\gamma)\frac{\mu_0}{\mu_1} \text{ and } w_2^* = \gamma\frac{\mu_0}{\mu_2}
+  \end{aligned}
+\end{equation}
+ Where 
+ \begin{itemize}
+    \item $\gamma = \frac{\mu_2^2 \eta_1^2 - \mu_1 \mu_2 \eta_{12}}{\mu_2^2 \eta_1^2 + \mu_1^2 \eta_2^2 - 2\mu_1 \mu_2 \eta_{12}}$
+    \item $\eta_2^2 = VAR[\hat{RV_t}]$
+    \item $\eta_{12} = COV[\hat{RV_t}, j_t^2]$
+    \item $\mu_0 = VAR[r_t]$
+    \item $\mu_1 = \bar{j_t^2}$
+    \item $\mu_2 = \bar{RV_t}$ 
+ \end{itemize}
+    
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
