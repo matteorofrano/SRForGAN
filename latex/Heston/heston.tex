@@ -866,7 +866,7 @@ machinery itself.
 \section{Scoring Rule ForGAN results}
 
 The experiment has been conducted using the Heston trajectories and the frFFT-based PDF estimator described in \ref{sec:frfft_validation}.\\
-The training procedure implemented is designed to run on a high-performance computing (HPC) of the CINECA nodes. In particular, the training script is executed on a node equipped with \textbf{8 CPU cores and 1 GPU}, as available on the Leonardo Booster partition.\\
+The training procedure implemented is designed to run on a high-performance computing (HPC) of the CINECA nodes. In particular, the training script is executed on a node equipped with \textbf{8 CPU cores and 1 GPU}, as available on the Leonardo Booster partition as explained in the setup discussion \ref{setup}.\\
 The script follows a fully automated pipeline that (i) generates a large synthetic Heston dataset in chunks, (ii) stores it in a binary streaming format, (iii) builds a memory-mapped dataset to avoid loading the full sample set into RAM, (iv) trains the SRForGAN generator on the GPU, and (v) saves the learned weights together with the full training configuration for reproducibility.\\
 
 The code implements the following workflow:

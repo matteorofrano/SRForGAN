@@ -1,5 +1,5 @@
 
-\section{SRForGAN and Hybrid ForGAN experimental results}
+\section{SRForGAN experimental results}
 
 The experimental setup is based on the same setup of the previous ForGAN section \ref{sec:bs experiment}.
 The asset price trajectories are simulated over a fixed time horizon of one month, discretized into $N=22$ daily time steps.
@@ -59,10 +59,14 @@ EMD Distance & 0.0018 \\
     \label{srforgan_sample}
 \end{figure}
 
+It can be noticed that the SRForGAN architecture is able to learn the target distribution with a high degree of accuracy, as evidenced by the evaluation metrics and visual inspection of the generated samples. 
+The KS test acceptance rate of 100\% indicates that the generated samples are statistically indistinguishable from the true distribution, while the low values of JS, Hellinger, TV, and EMD distances 
+further confirm the model's effectiveness in capturing the underlying dynamics of the asset price trajectories. These results demonstrate
+the potential of scoring rule-based generative models with respect to traditional adversarial approaches.\\
+Because of these considerations further experiments have been conducted using more complicated distributions,
+such as the Heston model, to assess the performance of the SRForGAN architecture in capturing complex stochastic processes.
 
-
-
-
+\begin{comment}
 
 %----------------------------------------------------------
 %----------------------------------------------------------
@@ -169,3 +173,5 @@ EMD Distance & 0.0110\\
     \caption{Samples obtained using fixed $X_0$, $\mu$ and $\sigma = [0.3, 0.5, 0.7, 0.9]$.}
     \label{hybrid_forwgan_sample}
 \end{figure}
+
+\end{comment}

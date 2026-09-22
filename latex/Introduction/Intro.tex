@@ -993,9 +993,21 @@ motivate the development of the SRForGAN architecture in this thesis.
 
 
 \chapter{Data, Models and Experimental Setup}
+\label{setup}
 Experiments are conducted to evaluate the performance of the proposed SRForGAN model in comparison to the original ForGAN architecture in order to assess their ability to produce coherent conditional distributions given well known financial processes, 
 in particular, the experiments adopt trajectories obtained from Geometric Brownian Motion and Heston stochastic volatility model. 
-This chapter outlines how training data are computed, model configurations, training procedures, and evaluation metrics used in the experiments.
+This chapter outlines how training data are computed, model configurations, training procedures, and evaluation metrics used in the experiments.\\
+
+Experiments were conducted on the Leonardo HPC cluster's 
+Booster partition at CINECA, using an Intel Xeon Platinum 
+8358 CPU (Ice Lake architecture, 32 cores, 2.6 GHz) and an 
+NVIDIA A100 SXM GPU with approximately 68 GB of VRAM. 
+The experiments were allocated 8 CPU cores and 1 GPU 
+through SLURM. The system runs PyTorch 2.8.0 with CUDA 12.8 
+support. 
+The Leonardo Booster nodes are equipped with 512 GB of DDR4 RAM and four NVIDIA A100 GPUs per node, 
+providing a high-performance environment for deep learning and 
+computational finance simulations.
 
 \section{Training Data}
 In order to effectively train the Conditional GAN models, two kinds of data are required for the training phase:
@@ -1480,6 +1492,9 @@ where $\hat{S}_E^{(\beta)}$ is the energy score estimator from Algorithm \ref{al
  
 % ─────────────────────────────────────────────────────────────────────────────
 
+
+\begin{comment}
+    
 Additionally, the paper states in the conclusion that the combination of adversarial and SR minimization would be beneficial and a promising path to explore. So an additional hybrid loss term is defined by adding the Energy Score to both the Wasserstein adversarial loss and classical Jensen-Shannon adversarial loss. 
 In particular, the generator loss using the hybrid approach is defined as:
 \begin{equation}
@@ -1613,7 +1628,7 @@ output is an unbounded real score.
 The critic and the discriminator are trained on real and fake samples, respectively, and do not interact with the Energy Score in any way,
 so they follow the standard adversarial training procedure already described in the previous chapter \ref{alg: cgan}, \ref{alg:cwgan_gp}.
 
-
+\end{comment}
 
 \section{Performance metrics and statistical tests}
 \label{sec:performance_metrics}

@@ -3,104 +3,113 @@
 
 
 \begin{frame}{Research Objective}
-\begin{itemize}
-    \item An efficient and robust estimator of the realized volatility is presented. 
-    This estimator, in contrast with classical theory, exploits just cheaper daily information.
-    \vspace{5mm} 
-    \item An advanced LSTM architecture with mixture of attention mechanism is introduced 
-    allowing for interpretable predictions by providing temporal-wise and variable-wise information.
+\begin{itemize} 
+    \item Different advanced GAN architectures are introduced to generate the future probability distribution of a financial time series given the previous history. 
     \vspace{5mm}
-    \item In order to improve predictive performance a stacking ensemble which combines a classical HAR model
-    and the Interpretable LSTM is tested.
+    \item The proposed GAN architectures are evaluated over Black-Scholes and Heston trajectories by using different statistical metrics
 \end{itemize}
 \end{frame}
 
 
 
-\begin{frame}{Why deep learning interpretability?}
-\begin{itemize}
-    \item Realized volatility (RV) is a measure of uncertainty and risk on financial markets.
-     It is not directly observable.   
-    \vspace{5mm} 
-    \item RV is adopted in highly regulated sectors like risk management and asset management 
-    \vspace{5mm}
-    \item eXplainable Artificial Intelligence (XAI) aims to provide insigths about black-box's predictions
-\end{itemize}
+\begin{frame}{Generative Adversarial Networks}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/gan_architecture.png}
+\end{figure}
+\begin{equation}
+\min_G \max_D V(D,G) = \mathbb{E}_{x \sim p_{\mathrm{data}}(x)}\left[\log D(x|c)\right] + \mathbb{E}_{z \sim p_z(z)}\left[\log\left(1-D(G(z|c))\right)\right]
+\end{equation}
+
+
+\begin{equation}
+\text{Generator Loss }\rightarrow \min_G V(D,G) = \mathbb{E}_{z \sim p_z(z)}\left[\log\left(1-D(G(z|c))\right)\right]
+\end{equation}
+
+This has been proved in the original GAN paper \cite{background:gan} to be equivalent to minimizing the Jensen-Shannon divergence between the real and generated data distributions.
+
 \end{frame}
 
 
 
 
-\begin{frame}{Stylized facts of Realized Volatility}
+
+\begin{frame}{Wasserstein GAN}
     
-    Econometrics literature provides different stylized facts about Realized Volatility.
-    The most important are:
-    \vspace{5mm}
-    \begin{itemize}
-        \item Volatility clustering: volatility remains high or low for long periods. %but eventually reverts toward a long-run level.
-        \vspace{3mm}
-        \item Long-memory: realized volatility exhibits slow decay in autocorrelations.
-         \vspace{3mm}
-        \item Leverage effect: negative returns shows higher impact on future volatility.
-        \vspace{3mm}
-        \item Non-Gaussian distribution: realized volatility is skewed and heavy-tailed.
-        \vspace{3mm}
-        \item Weekend effect: volatility is usually higher on Monday with respect to Friday.
-    \end{itemize} 
+The primal definition of the Wasserstein-1 distance 
+for two probability distributions, $\mathbb{P}_r$ (real) and $\mathbb{P}_g$ (generated) is given 
+by:
+\begin{equation*}
+    W(\mathbb{P}_r, \mathbb{P}_g) = \inf_{\pi \in \Pi(\mathbb{P}_r, \mathbb{P}_g)} \mathbb{E}_{(x, y) \sim \pi} [\|x - y\|]
+\end{equation*}
+where $\Pi(\mathbb{P}_r, \mathbb{P}_g)$ denotes the set of all joint distributions $\pi(x, y)$ with marginals $\mathbb{P}_r$ and $\mathbb{P}_g$.\\
+\vspace{1cm}
+CWGAN models rely on the Kantorovich-Rubinstein duality version (\cite{intro:duality}), which
+transforms the constrained minimization over transport plans into a maximization over a
+set of 1-Lipschitz continuous functions (the critic).
 
+\begin{equation}
+\min_G \max_D V(D,G) = \mathbb{E}_{x \sim p_{data}}[D(x \mid c)] 
+- \mathbb{E}_{z \sim p_z}[D(G(z \mid c))]
++ \lambda GP
+\end{equation}
 
+with $GP$ the gradient penalty term that enforces the 1-Lipschitz constraint on the critic network.
 \end{frame}
     
 
 
-\begin{frame}{Realized volatility estimator}
-    Starting from a simple log-price stochastic process described by the following Stochastic Differential Equation on a filtered probability space 
-$(\Omega,\mathcal F,\{\mathcal F_t\},\mathbb P)$:
-\begin{equation}
-    \label{eq:SDE}
-    \begin{aligned}
-        P_t = & P_0 + \int_0^t \mu_s\,ds \;+\; \int_0^t \sigma_s\,dW_s\\
-        dP_t = &  \mu_t dt + \sigma_t dW_t
-    \end{aligned}
-\end{equation}
+\begin{frame}{GAN architecture for time series probability forecasting}
+   
+To generate the future probability distribution of a time series $c = x_0, x_1, \ldots, x_t$, the following steps are taken:
+\begin{enumerate}
+    \item Train generator and discriminator using the CGAN or CWGAN loss function using $c_{[t_0, t]}$ as condition and $x_{t+1}$ as target.
+    \item The generator is ran multiple times using the same trajectory $c$ but perturbated noise vector $z$ obtaining an empirical distribution.
+\end{enumerate}
 
-where $p_0$ is a starting price, $\mu_t$ is the drift term, $\sigma_t$ is the diffusion term and $W_t \sim \mathcal{N}(0, t)$ is a standard Wiener process.
-In this case the realized volatility corresponds to the Integrated Variance $IV_t = \int_{t-1}^t \sigma^2_s ds$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/forgan.png}
+\end{figure}
 
-\vspace{5mm}
-
-In a more realistic framework jumps components need to be considered into the SDE, denoted by an additional term $J_t dQ_t$ with $Q_t$ a Poisson process.
-In this case the Realized Volatility is captured by the Quadratic variation over some time partition $\Pi=[0=t_0, t_1, ..., t_k, ...,  t_n=T]$ 
-\begin{equation}
-    {\displaystyle Q[P]_{t}=\lim _{\Vert \Pi\Vert \rightarrow 0}\sum _{k=1}^{n}(P_{t_{k}}-P_{t_{k-1}})^{2}}
-\end{equation}
 \end{frame}
 
 
-\begin{frame}{Realized volatility estimator}
-Authors in have proposed a range based estimator of the Realized Volatility that exploits daily price information only like:
-the open price $O_t$, the highest $H_t$, the closing price $C_t$, the lowest price $L_t$.
-Given some intermediate components:
-\begin{itemize}
-    \item $c_t = ln(C_t) - ln(O_t)$ price oscillation from the start to end value of the day.
-    \item $h_t = ln(H_t) - ln(O_t)$ price oscillation of the highest value from the opening one. 
-    \item $l_t = ln(L_t) - ln(O_t)$ price oscillation of the lowest value from the opening one.
-    \item $j_t = ln(O_t) - ln(C_{t-1})$ price oscillation of the current opening value from the last closed session.
-\end{itemize}
+\begin{frame}{GAN architecture for time series probability forecasting}
+\begin{columns}[c]
+
+    \begin{column}{0.38\textwidth}
+
+        \textbf{Generator}
+
+        \vspace{0.1cm}
+
+        It receives:
+        \begin{itemize}
+            \item conditioning information $c$ processed by a RNN that outputs a hidden state $h$
+            \item latent noise $z$
+            \item $z$ and $h$ are concatenated and processed by a FFN and outputs the next time step $x_{t+1}$
+        \end{itemize}
 
 
+        \textbf{Discriminator}
 
+        \vspace{0.1cm}
 
-\begin{equation}
-  \label{eq:rv_estimators}
-  \begin{aligned}
-    & PK_t = \frac{(h_t - l_t)^2}{4ln2} \qquad \hspace{6.9cm} \text{Parkinson,1980}\\
-    &GK_t = 0.511(h_t - l_t)^2 - 0.019(c_t(h_t + l_t)-2h_t l_t) - 0.383c_t^2 \quad {Garman\&Klass,1980}\\
-    &RS_t = h_t(h_t - c_t) + l_t(l_t - c_t) \qquad \hspace{4.0cm} \text{Rogers\&Satchell,1991}
-  \end{aligned}
-\end{equation}
+        It receives the concatenated $(c, x_{t+1})$ 
+        which is processed by a RNN. The hidden state $h$ is then processed by a FFN to output 
+        the probability/score of the sample being real or fake.
 
+    \end{column}
 
+    \begin{column}{0.58\textwidth}
+
+        \centering
+        \includegraphics[height=0.82\textheight]{images/forgan_rnn.png}
+
+    \end{column}
+
+\end{columns}
 \end{frame}
 
 

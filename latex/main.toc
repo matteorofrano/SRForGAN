@@ -1,57 +1,57 @@
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Literature Review}{10}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Standard GAN model}{10}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Wasserstein GANs and other improvements}{13}{section.2.2}%
-\contentsline {section}{\numberline {2.3}GANs for Time Series}{18}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Probabilistic Forecasting using GANs}{19}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Scoring Rules and ForGAN advances}{23}{section.2.5}%
-\contentsline {paragraph}{Strict propriety.}{23}{section*.5}%
-\contentsline {section}{\numberline {2.6}Applications in Quantitative Finance}{25}{section.2.6}%
-\contentsline {section}{\numberline {2.7}Limitations of standard forecast techniques}{26}{section.2.7}%
-\contentsline {section}{\numberline {2.8}Limitations of GANs}{27}{section.2.8}%
-\contentsline {chapter}{\numberline {3}Data, Models and Experimental Setup}{29}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Training Data}{29}{section.3.1}%
+\contentsline {chapter}{\numberline {1}Introduction}{6}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Literature Review}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Standard GAN model}{9}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Wasserstein GANs and other improvements}{12}{section.2.2}%
+\contentsline {section}{\numberline {2.3}GANs for Time Series}{17}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Probabilistic Forecasting using GANs}{18}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Scoring Rules and ForGAN advances}{22}{section.2.5}%
+\contentsline {paragraph}{Strict propriety.}{22}{section*.5}%
+\contentsline {section}{\numberline {2.6}Applications in Quantitative Finance}{24}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Limitations of standard forecast techniques}{25}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Limitations of GANs}{26}{section.2.8}%
+\contentsline {chapter}{\numberline {3}Data, Models and Experimental Setup}{28}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Training Data}{28}{section.3.1}%
 \contentsline {section}{\numberline {3.2}The ForGAN Architecture}{29}{section.3.2}%
-\contentsline {section}{\numberline {3.3}The SRForGAN Architecture}{31}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Performance metrics and statistical tests}{39}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Distance metrics}{39}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}The Kolmogorov-Smirnov test}{40}{subsection.3.4.2}%
-\contentsline {chapter}{\numberline {4}Experiments with Black-Scholes dynamics}{42}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Data and Training procedure}{42}{section.4.1}%
-\contentsline {section}{\numberline {4.2}ForGAN results with variable volatility trajectories}{45}{section.4.2}%
-\contentsline {section}{\numberline {4.3}SRForGAN and Hybrid ForGAN experimental results}{50}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Experiments with Heston model dynamics}{55}{chapter.5}%
-\contentsline {section}{\numberline {5.1}The Heston Stochastic Volatility Model}{55}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}The Heston System of SDEs}{55}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Numerical Discretisation of the Heston SDEs}{56}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}The Characteristic Function and the Fourier Inversion Formula}{57}{subsection.5.1.3}%
-\contentsline {subsection}{\numberline {5.1.4}The PDF Computation Pipeline}{61}{subsection.5.1.4}%
-\contentsline {section}{\numberline {5.2}Numerical Validation of the Fractional FFT via the Black-Scholes Characteristic Function}{65}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Validation Design}{66}{subsection.5.2.1}%
-\contentsline {paragraph}{Step A: Analytical moments sanity check.}{66}{section*.6}%
-\contentsline {paragraph}{Step B: frFFT Inversion.}{67}{section*.7}%
-\contentsline {paragraph}{Step C: Distribution Metrics.}{68}{section*.8}%
-\contentsline {subsection}{\numberline {5.2.2}Summary and Interpretation}{71}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}Scoring Rule ForGAN results}{71}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Steps for experiment reproducibility}{72}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Test results}{74}{subsection.5.3.2}%
-\contentsline {section}{\numberline {5.4}Pricing-Based Validation of the Forecast Distribution}{79}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Experimental design}{80}{subsection.5.4.1}%
-\contentsline {paragraph}{Test set.}{80}{section*.9}%
-\contentsline {paragraph}{Strike grid.}{80}{section*.10}%
-\contentsline {paragraph}{Discounting.}{81}{section*.11}%
-\contentsline {paragraph}{Oracle price.}{81}{section*.12}%
-\contentsline {paragraph}{Heston Monte Carlo price.}{81}{section*.13}%
-\contentsline {paragraph}{GAN price.}{81}{section*.14}%
-\contentsline {paragraph}{Implied volatility.}{81}{section*.15}%
-\contentsline {paragraph}{Error and diagnostic metrics.}{82}{section*.16}%
-\contentsline {subsection}{\numberline {5.4.2}Results}{82}{subsection.5.4.2}%
-\contentsline {chapter}{\numberline {6}Conclusion}{84}{chapter.6}%
-\contentsline {chapter}{Appendices}{87}{section*.17}%
-\contentsline {chapter}{\numberline {A}Joint distributions as transport plans}{89}{appendix.1.A}%
-\contentsline {chapter}{\numberline {B}Verification of the assumptions underlying the Energy Score as loss function}{92}{appendix.1.B}%
-\contentsline {section}{\numberline {B.1}Finite-moment assumption}{92}{section.1.B.1}%
-\contentsline {section}{\numberline {B.2}Unbiasedness of the estimator}{94}{section.1.B.2}%
-\contentsline {section}{\numberline {B.3}Independence of the generated observations}{95}{section.1.B.3}%
-\contentsline {section}{\numberline {B.4}Differentiability of the learning objective}{96}{section.1.B.4}%
+\contentsline {section}{\numberline {3.3}The SRForGAN Architecture}{30}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Performance metrics and statistical tests}{37}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Distance metrics}{38}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}The Kolmogorov-Smirnov test}{38}{subsection.3.4.2}%
+\contentsline {chapter}{\numberline {4}Experiments with Black-Scholes dynamics}{40}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Data and Training procedure}{40}{section.4.1}%
+\contentsline {section}{\numberline {4.2}ForGAN results with variable volatility trajectories}{43}{section.4.2}%
+\contentsline {section}{\numberline {4.3}SRForGAN experimental results}{48}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Experiments with Heston model dynamics}{50}{chapter.5}%
+\contentsline {section}{\numberline {5.1}The Heston Stochastic Volatility Model}{50}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}The Heston System of SDEs}{50}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Numerical Discretisation of the Heston SDEs}{51}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}The Characteristic Function and the Fourier Inversion Formula}{52}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}The PDF Computation Pipeline}{56}{subsection.5.1.4}%
+\contentsline {section}{\numberline {5.2}Numerical Validation of the Fractional FFT via the Black-Scholes Characteristic Function}{60}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Validation Design}{61}{subsection.5.2.1}%
+\contentsline {paragraph}{Step A: Analytical moments sanity check.}{61}{section*.6}%
+\contentsline {paragraph}{Step B: frFFT Inversion.}{62}{section*.7}%
+\contentsline {paragraph}{Step C: Distribution Metrics.}{63}{section*.8}%
+\contentsline {subsection}{\numberline {5.2.2}Summary and Interpretation}{66}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Scoring Rule ForGAN results}{66}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Steps for experiment reproducibility}{67}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Test results}{69}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Pricing-Based Validation of the Forecast Distribution}{75}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Experimental design}{76}{subsection.5.4.1}%
+\contentsline {paragraph}{Test set.}{76}{section*.9}%
+\contentsline {paragraph}{Strike grid.}{76}{section*.10}%
+\contentsline {paragraph}{Discounting.}{76}{section*.11}%
+\contentsline {paragraph}{Oracle price.}{77}{section*.12}%
+\contentsline {paragraph}{Heston Monte Carlo price.}{77}{section*.13}%
+\contentsline {paragraph}{GAN price.}{77}{section*.14}%
+\contentsline {paragraph}{Implied volatility.}{77}{section*.15}%
+\contentsline {paragraph}{Error and diagnostic metrics.}{77}{section*.16}%
+\contentsline {subsection}{\numberline {5.4.2}Results}{78}{subsection.5.4.2}%
+\contentsline {chapter}{\numberline {6}Conclusion}{80}{chapter.6}%
+\contentsline {chapter}{Appendices}{83}{section*.17}%
+\contentsline {chapter}{\numberline {A}Joint distributions as transport plans}{85}{appendix.1.A}%
+\contentsline {chapter}{\numberline {B}Verification of the assumptions underlying the Energy Score as loss function}{88}{appendix.1.B}%
+\contentsline {section}{\numberline {B.1}Finite-moment assumption}{88}{section.1.B.1}%
+\contentsline {section}{\numberline {B.2}Unbiasedness of the estimator}{90}{section.1.B.2}%
+\contentsline {section}{\numberline {B.3}Independence of the generated observations}{91}{section.1.B.3}%
+\contentsline {section}{\numberline {B.4}Differentiability of the learning objective}{92}{section.1.B.4}%

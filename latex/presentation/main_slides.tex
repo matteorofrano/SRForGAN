@@ -12,6 +12,21 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 
+% Bibliography
+\usepackage[
+    backend=biber,
+    style=authoryear
+]{biblatex}
+
+\addbibresource{biblio.bib}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=unipi,
+    citecolor=unipi,
+    urlcolor=unipi
+}
+
 % Optional: remove navigation symbols
 \setbeamertemplate{navigation symbols}{}
 
@@ -33,7 +48,7 @@
 
 %---Bottom title 
 
-\definecolor{unipi}{RGB}{0,100,200}   % example deep blue
+\definecolor{unipi}{RGB}{187,46,41}   
 \setbeamercolor{footlinecolor}{bg=unipi, fg=white}
 
 \setbeamertemplate{footline}{%
@@ -43,10 +58,10 @@
       Matteo Rofrano
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=.34\paperwidth,ht=3ex,dp=1.5ex,center]{footlinecolor}%
-      MSc in Data Science and Business Informatics
+      MSc in Quantitative Finance
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=.33\paperwidth,ht=3ex,dp=1.5ex,center]{footlinecolor}%
-      December 04, 2025
+      October 27, 2026
     \end{beamercolorbox}%
   }%
 }
@@ -74,25 +89,25 @@
 \begin{frame}
 \begin{beamercolorbox}[rounded=true, center, sep=1ex, wd=\textwidth]{frametitlebox}
     \usebeamerfont{frametitle}
-    Interpretable Deep Learning Model\\
-    for Realized Volatility Forecasting
+    A Scoring Rule GAN for the generation of \\
+    future probability distribution of financial processes
   \end{beamercolorbox}
 
 \vspace{5mm}
 
 \begin{figure}[!htb]
     \centering
-    \IfFileExists{frontespizio.jpg}{\includegraphics[keepaspectratio=true,scale=0.20]{frontespizio.jpg}}{\fbox{\parbox{0.8\textwidth}{\centering Logo not found: frontespizio.jpg}}}
+    \includegraphics[keepaspectratio=true,scale=0.70]{frontespizio.jpg}
 \end{figure}
 
 \begin{center}
     \LARGE{Matteo Rofrano}\\
     \vspace{3mm}
-    \Large{MSc in Data Science and Business Informatics}
+    \Large{MSc in Quantitative Finance}
 
     \vspace{5mm}
 
-    \large{04/12/2025}
+    \large{27/10/2026}
 \end{center}
 
 \vspace{5mm}
