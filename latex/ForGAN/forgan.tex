@@ -169,7 +169,7 @@ The following setup for the experiments has been used:\\
     \item \textbf{Time horizon}: $T = 1.0 $ yearly horizon
     \item \textbf{Number of time steps}: $N = 252$
     \item \textbf{Number of simulated paths}: $J = 100{,}000$
-    \item \textbf{n-steps ahead}: $\tau = 1$
+    \item \textbf{n-steps ahead}: $\tau = 10$
 \end{itemize}
 
 The experimental setup is based on a data generation process designed to emulate realistic financial price dynamics exploiting Geometric Brownian motion described in the before in previous section. 
@@ -265,7 +265,7 @@ Learning Rate              & \multicolumn{2}{l}{0.0005}                         
 
 The Kolmogorov-Smirnov test performed on 100000 real and generated probability distributions shows that
 the resulting p-values are accepted 34\% of times, quite higher than the ForGAN proposed models but still far from the desired level.\\
-Moreover, the average Jensen-Shannon divergence over the test samples is around 0.28 which highlights an improvement with respect to the ForGAN model.\\
+Moreover, the average Jensen-Shannon divergence over the test samples is around 0.36 which highlights an improvement with respect to the ForGAN model.\\
 \begin{table}[h]
 \centering
 \begin{tabular}{l c}
@@ -273,10 +273,10 @@ Moreover, the average Jensen-Shannon divergence over the test samples is around 
 \textbf{Metric} & \textbf{Value} \\
 \hline
 KS Test Acceptance (\%) & 34.00 \\
-EMD distance & 0.00380 \\
-JS Distance & 0.2802 \\
-Hellinger Distance & 0.2510 \\
-TV Distance & 0.2539 \\
+EMD distance & 0.00409 \\
+JS Distance & 0.3602 \\
+Hellinger Distance & 0.3210 \\
+TV Distance & 0.3339 \\
 \hline
 \end{tabular}
 \caption{ForWGAN performance metrics averaged over 100000 samples}

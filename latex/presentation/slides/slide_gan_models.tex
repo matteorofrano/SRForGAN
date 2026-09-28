@@ -1,0 +1,112 @@
+\section{GAN for Time Series}
+
+
+\begin{frame}{GAN architecture for time series probability forecasting}
+   
+To generate the future probability distribution of a time series $c = x_0, x_1, \ldots, x_t$, the following steps are taken:
+\begin{enumerate}
+    \item Train generator and discriminator using the CGAN or CWGAN loss function using $c_{[t_0, t]}$ as condition and $x_{t+1}$ as target.
+    \item The generator is ran multiple times using the same trajectory $c$ but perturbated noise vector $z$ obtaining an empirical distribution.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/forgan.png}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{GAN architecture for time series probability forecasting}
+\begin{columns}[c]
+
+    \begin{column}{0.38\textwidth}
+
+        \textbf{Generator}
+
+        \vspace{0.1cm}
+
+        It receives:
+        \begin{itemize}
+            \item conditioning information $c$ processed by a RNN that outputs a hidden state $h$
+            \item latent noise $z$
+            \item $z$ and $h$ are concatenated and processed by a FFN and outputs the next time step $x_{t+1}$
+        \end{itemize}
+
+
+        \textbf{Discriminator}
+
+        \vspace{0.1cm}
+
+        It receives the concatenated $(c, x_{t+1})$ 
+        which is processed by a RNN. The hidden state $h$ is then processed by a FFN to output 
+        the probability/score of the sample being real or fake.
+
+    \end{column}
+
+    \begin{column}{0.58\textwidth}
+
+        \centering
+        \includegraphics[height=0.82\textheight]{images/forgan_rnn.png}
+
+    \end{column}
+
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}{GAN architecture for time series probability forecasting}
+   
+To generate the future probability distribution of a time series $c = x_0, x_1, \ldots, x_t$, the following steps are taken:
+\begin{enumerate}
+    \item Train generator and discriminator using the CGAN or CWGAN loss function using $c_{[t_0, t]}$ as condition and $x_{t+1}$ as target.
+    \item The generator is ran multiple times using the same trajectory $c$ but perturbated noise vector $z$ obtaining an empirical distribution.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/forgan.png}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{GAN architecture for time series probability forecasting}
+\begin{columns}[c]
+
+    \begin{column}{0.38\textwidth}
+
+        \textbf{Generator}
+
+        \vspace{0.1cm}
+
+        It receives:
+        \begin{itemize}
+            \item conditioning information $c$ processed by a RNN that outputs a hidden state $h$
+            \item latent noise $z$
+            \item $z$ and $h$ are concatenated and processed by a FFN and outputs the next time step $x_{t+1}$
+        \end{itemize}
+
+
+        \textbf{Discriminator}
+
+        \vspace{0.1cm}
+
+        It receives the concatenated $(c, x_{t+1})$ 
+        which is processed by a RNN. The hidden state $h$ is then processed by a FFN to output 
+        the probability/score of the sample being real or fake.
+
+    \end{column}
+
+    \begin{column}{0.58\textwidth}
+
+        \centering
+        \includegraphics[height=0.82\textheight]{images/forgan_rnn.png}
+
+    \end{column}
+
+\end{columns}
+\end{frame}
+
+

@@ -1,0 +1,95 @@
+\section{Scoring Rule based GAN}
+
+\begin{frame}{Scoring Rules: Theory and Motivation}
+A scoring rule evaluates a probabilistic forecast $P^\phi$ against
+an observed outcome $y$. For probabilistic forecasting, the key
+property is \textbf{strict propriety}:
+
+\begin{equation}
+\begin{aligned}
+\mathbb{E}_{Y\sim P^\star}
+\left[S(P^\star,Y)\right]
+<
+\mathbb{E}_{Y\sim P^\star}
+\left[S(P^\phi,Y)\right],
+\qquad
+P^\phi \neq P^\star .
+\end{aligned}
+\end{equation}
+
+\vspace{0.1cm}
+
+Therefore, the expected score is uniquely minimized when
+
+\begin{equation}
+P^\phi(\cdot\mid c)=P^\star(\cdot\mid c).
+\end{equation}
+
+\textbf{Why useful for generative forecasting?}
+
+\begin{itemize}
+    \item Directly optimizes the \textbf{full predictive distribution},
+    rather than only individual generated samples.
+    
+    \item Provides a \textbf{theoretically well-defined optimum} through
+    strict propriety.
+    
+    \item Encourages both \textbf{accuracy and probabilistic spread},
+    making it suitable for avoiding degenerate forecasts.
+    
+    \item Can be optimized directly with gradient-based methods using
+    the generator reparameterization $X=G_\phi(z,c)$.
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{From ForGAN to Scoring-Rule ForGAN}
+
+Instead of training a generator through a discriminator,
+the generator directly minimizes a strictly proper scoring rule.
+
+For the Energy Score:
+
+\begin{equation}
+\begin{aligned}
+S_E^{(\beta)}(P^\phi,y)
+&=
+2\,\mathbb{E}\|X-y\|^\beta
+-
+\mathbb{E}\|X-X'\|^\beta ,
+\\
+&\qquad X,X'\sim P^\phi,
+\quad \beta\in(0,2).
+\end{aligned}
+\end{equation}
+
+For the univariate case, $\beta=1$ gives the \textbf{CRPS}.
+
+\vspace{0.1cm}
+
+\textbf{Why can this improve ForGAN?}
+
+\begin{itemize}
+    \item \textbf{Accuracy:} generated samples are pulled toward the
+    observed realization through $\|X-y\|^\beta$.
+    
+    \item \textbf{Spread:} the negative pairwise-distance term rewards
+    diversity among generated samples.
+    
+    \item \textbf{Mode collapse:} a degenerate generator with
+    $X\approx X'$ receives no spread reward, discouraging
+    single-point forecasts.
+    
+    \item \textbf{No discriminator:} removes the adversarial training
+    loop and its dependence on the critic's ability to provide useful
+    gradients.
+    
+    \item \textbf{Goal:} learn the conditional distribution
+    $P^\phi(\cdot\mid c)$ rather than only realistic individual samples.
+\end{itemize}
+
+\end{frame}
+
+
