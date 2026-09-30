@@ -84,30 +84,27 @@ where $\Delta t = dt \times \tau$.
 \end{frame}
 
 
-\begin{frame}{ForGAN vs ForWGAN: Results}
+\begin{frame}{ForGAN vs ForWGAN vs SRForGAN: Results}
 
-\textbf{Quantitative evaluation}
+\textbf{Experiment:} same training/test data; only the architecture and
+training objective are changed from ForGAN, ForWGAN and SRForGAN.
 
-\vspace{0.1cm}
 
 \begin{table}
 \centering
-\begin{tabular}{lcc}
+\begin{tabular}{lccc}
 \hline
-\textbf{Metric} & \textbf{ForGAN} & \textbf{ForWGAN} \\
+\textbf{Metric} & \textbf{ForGAN} & \textbf{ForWGAN} & \textbf{SRForGAN} \\
 \hline
-KS Test Acceptance (\%) & 25.00 & 39.00 \\
-EMD Distance            & 0.00855 & 0.00409 \\
-JS Distance             & 0.4378 & 0.3602 \\
-Hellinger Distance      & 0.4001 & 0.3210 \\
-TV Distance             & 0.4129 & 0.3339 \\
+KS Test Acceptance (\%) & 25.00 & 39.00 & 100.00 \\
+EMD Distance            & 0.00855 & 0.00409 & 0.0018 \\
+JS Divergence             & 0.4378 & 0.3602 & 0.1365 \\
+Hellinger Distance      & 0.4001 & 0.3210 & 0.1178 \\
+TV Distance             & 0.4129 & 0.3339 & 0.1099 \\
 \hline
 \end{tabular}
 \end{table}
 
-\vspace{0.15cm}
-
-\textbf{Main findings}
 
 \begin{itemize}
     \item \textbf{ForWGAN improves all distributional metrics} with respect to ForGAN.
@@ -117,16 +114,13 @@ TV Distance             & 0.4129 & 0.3339 \\
     \item JS distance decreases from \textbf{0.4378} to \textbf{0.3602},
     indicating a closer match to the target distributions.
     
-    \item EMD, Hellinger and TV distances are also consistently reduced.
-    
-    \item Despite the improvement, the model still struggles to accurately
-    reproduce the target distributions, motivating further investigation.
+    \item Despite the improvement, the Wassertein model still struggles to accurately
+    reproduce the target distributions, motivating introduction of scoring rule ForGAN.
+
+    \item \textbf{SRForGAN achieves 100\% KS test acceptance} and the lowest values for all other metrics, 
+    avoiding the limitations of adversarial training like mode collapse.
 \end{itemize}
 
-\vspace{0.05cm}
-
-\textbf{Experiment:} same training/test data; only the architecture and
-training objective are changed from ForGAN to ForWGAN.
 
 \end{frame}
 
@@ -134,7 +128,7 @@ training objective are changed from ForGAN to ForWGAN.
 
 
 
-\begin{frame}{ForGAN vs ForWGAN: Results}
+\begin{frame}{ForGAN vs ForWGAN vs SRForGAN: Results}
     \begin{figure}[H]
     \centering
     \includegraphics[scale=0.33]{images/samples_forgan_simple.png}
@@ -143,14 +137,22 @@ training objective are changed from ForGAN to ForWGAN.
 \end{figure}
 \end{frame}
 
-\begin{frame}{ForGAN vs ForWGAN: Results}
+\begin{frame}{ForGAN vs ForWGAN vs SRForGAN: Results}
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.33]{images/samples_forgan.png}
     \caption{Samples obtained from the ForWGAN using fixed $X_0$ and $\mu$ while varying $\sigma = [0.3, 0.5, 0.7, 0.9]$.}
     \label{forwgan_sample_sigma}
 \end{figure}
+\end{frame}
 
+\begin{frame}{ForGAN vs ForWGAN vs SRForGAN: Results}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.33]{images/SRForGAN_samples.png}
+    \caption{Samples obtained from the SRForGAN using fixed $X_0$ and $\mu$ while varying $\sigma = [0.3, 0.5, 0.7, 0.9]$.}
+    \label{srforgan_sample_sigma}
+\end{figure}
 \end{frame}
 
 

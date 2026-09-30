@@ -1,7 +1,8 @@
 \section{Scoring Rule based GAN}
 
 \begin{frame}{Scoring Rules: Theory and Motivation}
-A scoring rule evaluates a probabilistic forecast $P^\phi$ against
+
+A scoring rule $S(P^\phi, y)$ evaluates a probabilistic forecast $P^\phi$ against
 an observed outcome $y$. For probabilistic forecasting, the key
 property is \textbf{strict propriety}:
 
@@ -25,11 +26,10 @@ Therefore, the expected score is uniquely minimized when
 P^\phi(\cdot\mid c)=P^\star(\cdot\mid c).
 \end{equation}
 
-\textbf{Why useful for generative forecasting?}
+\vspace{0.3cm}
+\textbf{Why useful for probabilistic forecasting?}
 
 \begin{itemize}
-    \item Directly optimizes the \textbf{full predictive distribution},
-    rather than only individual generated samples.
     
     \item Provides a \textbf{theoretically well-defined optimum} through
     strict propriety.
@@ -38,7 +38,7 @@ P^\phi(\cdot\mid c)=P^\star(\cdot\mid c).
     making it suitable for avoiding degenerate forecasts.
     
     \item Can be optimized directly with gradient-based methods using
-    the generator reparameterization $X=G_\phi(z,c)$.
+    the generator reparameterization $Y=G_\phi(z,c)$.
 \end{itemize}
 
 \end{frame}
@@ -50,33 +50,22 @@ P^\phi(\cdot\mid c)=P^\star(\cdot\mid c).
 Instead of training a generator through a discriminator,
 the generator directly minimizes a strictly proper scoring rule.
 
-For the Energy Score:
+For the univariate forecasting \textbf{Continuous Ranked Probability Score (CRPS)}:
 
 \begin{equation}
 \begin{aligned}
-S_E^{(\beta)}(P^\phi,y)
-&=
-2\,\mathbb{E}\|X-y\|^\beta
--
-\mathbb{E}\|X-X'\|^\beta ,
-\\
-&\qquad X,X'\sim P^\phi,
-\quad \beta\in(0,2).
+&CRPS(P^\phi, y)  = \underbrace{\mathbb{E}|X - y|}_{\text{accuracy term}} - \frac{1}{2}\underbrace{\mathbb{E}|X - X'|}_{\text{spread term}} \\     
 \end{aligned}
 \end{equation}
 
-For the univariate case, $\beta=1$ gives the \textbf{CRPS}.
+With $X,X'\sim P^\phi$
 
-\vspace{0.1cm}
-
+\vspace{0.3cm}
 \textbf{Why can this improve ForGAN?}
 
 \begin{itemize}
     \item \textbf{Accuracy:} generated samples are pulled toward the
-    observed realization through $\|X-y\|^\beta$.
-    
-    \item \textbf{Spread:} the negative pairwise-distance term rewards
-    diversity among generated samples.
+    observed realization through $|X-y|$.
     
     \item \textbf{Mode collapse:} a degenerate generator with
     $X\approx X'$ receives no spread reward, discouraging
@@ -93,3 +82,9 @@ For the univariate case, $\beta=1$ gives the \textbf{CRPS}.
 \end{frame}
 
 
+\begin{frame}{Scoring-Rule ForGAN Training Procedure}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{images/srforgan_train_schema.png}
+\end{figure}
+\end{frame}
