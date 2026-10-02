@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main_slides"] 0 "main_slides.bcf" "main_slides.bbl" "main_slides" 1790803623.85335 -1
+["biber main_slides"] 0 "main_slides.bcf" "main_slides.bbl" "main_slides" 1790974469.111 -1
   "biblio.bib" 1785691617 11731 f02fbb882c1f1ec53492b590aaf9f560 ""
-  "main_slides.bcf" 1790803623 108332 60747a911a5400c10815755a9139d14e "pdflatex"
+  "main_slides.bcf" 1790974468 108332 60747a911a5400c10815755a9139d14e "pdflatex"
   (generated)
   "main_slides.bbl"
   "main_slides.blg"
   (rewritten before read)
-["pdflatex"] 1790803621.03283 "c:/Users/matte/LEARNING/MAGISTRALE/QUANTITATIVE FINANCE/TESI/cGAN_code/latex/presentation/main_slides.tex" "main_slides.pdf" "main_slides" 1790803623.85407 0
+["pdflatex"] 1790974465.05259 "c:/Users/matte/LEARNING/MAGISTRALE/QUANTITATIVE FINANCE/TESI/cGAN_code/latex/presentation/main_slides.tex" "main_slides.pdf" "main_slides" 1790974469.11205 0
   "C:/Users/matte/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1763227686 163467 115bf7c03ef5429b41e730e9b3b13e66 ""
   "C:/Users/matte/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1756761838 13257342 3cdf40aebdc7687414c82debb3f5997f ""
   "C:/Users/matte/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -242,23 +242,26 @@
   "images/gan_architecture.png" 1783274354 14279 eed090738ffb97c626815e80c7ea2fa5 ""
   "images/samples_forgan.png" 1786481070 82082 8dbb24cea7157626f393caa3a258938d ""
   "images/samples_forgan_simple.png" 1786480803 74214 c2b5829b75dbed4b06327f90933e619e ""
+  "images/srforgan_samples_2.png" 1781472668 94385 846714c0bc36024f0c3fb75d18ee2ff1 ""
+  "images/srforgan_samples_all_params.png" 1785440906 110290 811894b22799135a4ed96c156dd3b9f3 ""
+  "images/srforgan_samples_volvol.png" 1785277250 100640 349fe55498e0fed4efd0d8f6b19f92e0 ""
   "images/srforgan_train_schema.png" 1778444594 65631 5d8a4d073bc03dc2491330158b3d7efc ""
-  "main_slides.aux" 1790803623 1074 99b1194898cf7e509657dc9c8e99238d "pdflatex"
+  "main_slides.aux" 1790974468 1074 12a744548ed1c45e05ccaf09df436cab "pdflatex"
   "main_slides.bbl" 1790109075 4835 30e975ae7fd6faf9e667e7453695ca5d "biber main_slides"
-  "main_slides.nav" 1790803623 3161 aefc4b52defd80a3268cad5fd83cbe7e "pdflatex"
-  "main_slides.out" 1790803623 694 f9be80efc54259f8b69f56d4701a560e "pdflatex"
-  "main_slides.run.xml" 1790803623 2356 e584084de3785910126e8b962cc52afc "pdflatex"
+  "main_slides.nav" 1790974468 3897 3dae3bb80a55bede0b04b91b35014eec "pdflatex"
+  "main_slides.out" 1790974468 694 f9be80efc54259f8b69f56d4701a560e "pdflatex"
+  "main_slides.run.xml" 1790974468 2356 e584084de3785910126e8b962cc52afc "pdflatex"
   "main_slides.tex" 1790803617 3238 3560fa66842fa372a293848bf08e58f2 ""
-  "main_slides.toc" 1790803623 274 d6d860e579d3bd4acc1da9a1ec5283e5 "pdflatex"
-  "slides/slide_bs_results.aux" 1790803623 5683 6d29bef867ce80bc897f02e236380511 "pdflatex"
+  "main_slides.toc" 1790974468 274 d6d860e579d3bd4acc1da9a1ec5283e5 "pdflatex"
+  "slides/slide_bs_results.aux" 1790974468 5683 6d29bef867ce80bc897f02e236380511 "pdflatex"
   "slides/slide_bs_results.tex" 1790803441 5590 8c74db8ddcebc54f0a2ea675b62a5e2f ""
-  "slides/slide_gan_models.aux" 1790803622 4809 977b8e2fddd4169af4a288b6d6572acc "pdflatex"
+  "slides/slide_gan_models.aux" 1790974467 4809 977b8e2fddd4169af4a288b6d6572acc "pdflatex"
   "slides/slide_gan_models.tex" 1790625836 3325 a7fe1d013f9291e43915a14557903f89 ""
-  "slides/slide_heston.aux" 1790803623 4309 b4a664b1144cfd5e8f47f9e63d96db91 "pdflatex"
-  "slides/slide_heston.tex" 1790803617 29 2661c0856b8227a8178611cda8204cef ""
-  "slides/slide_intro.aux" 1790803622 4653 849fa85550f8026eaca844ff8c9274b6 "pdflatex"
+  "slides/slide_heston.aux" 1790974468 5334 d95668e05197a1e3c5c92253ecad5d88 "pdflatex"
+  "slides/slide_heston.tex" 1790974464 5315 9067ad039d62500fb70145b4aee42f62 ""
+  "slides/slide_intro.aux" 1790974467 4653 849fa85550f8026eaca844ff8c9274b6 "pdflatex"
   "slides/slide_intro.tex" 1790625836 2198 b9c2b2fb2c62f406e2e0b38b03432b27 ""
-  "slides/slides_scoring_rule.aux" 1790803623 4713 0c8cfe6f0330d45b7bf05ddcfc1fd0ca "pdflatex"
+  "slides/slides_scoring_rule.aux" 1790974467 4713 0c8cfe6f0330d45b7bf05ddcfc1fd0ca "pdflatex"
   "slides/slides_scoring_rule.tex" 1790803441 2522 bedb5ba1a77ac121e56a74d25308bca1 ""
   (generated)
   "main_slides.aux"
