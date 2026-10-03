@@ -1,6 +1,4 @@
-\section{Black-Scholes Results}
-
-
+\section{Black-Scholes Experiment's Results}
 
 \begin{frame}{Black-Scholes experimental setup}
 
@@ -80,6 +78,135 @@ where $\Delta t = dt \times \tau$.
     \item \textbf{Ground truth:} analytical and Monte Carlo Gaussian distribution
     \item \textbf{Models:} ForGAN with BCE and WGAN-GP losses
 \end{itemize}
+\end{frame}
+
+%===========================================================
+% Statistical distance metrics
+%===========================================================
+
+\begin{frame}{Statistical distance metrics}
+Given two discrete probability distributions $P=(p_1,\ldots,p_B)$ and $Q=(q_1,\ldots,q_B)$ over the same support.
+
+\begin{columns}[T,onlytextwidth]
+
+%-----------------------------------------------------------
+% LEFT COLUMN
+%-----------------------------------------------------------
+\begin{column}{0.48\textwidth}
+
+\textbf{Total Variation (TV)}
+
+\begin{equation*}
+\delta(P,Q)
+=
+\frac{1}{2}\sum_i |p_i-q_i|
+\end{equation*}
+
+Measures the maximum difference in probability
+assigned to the same event. 
+%It is \textbf{bin-blind}: it does not account for the distance between bins.
+
+\vspace{0.2cm}
+
+\textbf{Hellinger distance}
+
+\begin{equation*}
+H(P,Q)
+=
+\frac{1}{\sqrt{2}}
+\sqrt{\sum_i
+\left(\sqrt{p_i}-\sqrt{q_i}\right)^2}
+\end{equation*}
+
+Bounded in $[0,1]$ it is more sensitive to differences in the
+tails than TV distance.
+
+\end{column}
+
+%-----------------------------------------------------------
+% RIGHT COLUMN
+%-----------------------------------------------------------
+\begin{column}{0.48\textwidth}
+
+\textbf{Jensen--Shannon (JS)}
+
+\begin{equation*}
+JS(P,Q)
+=
+\frac{1}{2}KL(P\|M)
++
+\frac{1}{2}KL(Q\|M),
+\qquad
+M=\frac{P+Q}{2}
+\end{equation*}
+
+Symmetric and smoothed version of KL divergence.
+
+\vspace{0.2cm}
+
+\textbf{Wasserstein distance}
+
+\begin{equation*}
+W_1(P,Q)
+=
+\sum_i
+\left|
+CDF_P(i)-CDF_Q(i)
+\right|
+\end{equation*}
+\textbf{geometry-aware}: it accounts for how far
+probability mass must be moved between bins to match.
+
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+
+%===========================================================
+% Kolmogorov--Smirnov test
+%===========================================================
+
+\begin{frame}{Kolmogorov--Smirnov (KS) test}
+
+The KS test is a \textbf{distribution-free} and \textbf{non-parametric} test that measures the maximum discrepancy between an
+empirical CDF $F_n(x)$ and a reference CDF $F(x)$:
+
+
+\begin{equation}
+D
+=
+\max_k
+\left|
+CDF_p(i)
+-
+CDF_q(i)
+\right|.
+\end{equation}
+
+
+Large $D$ indicates a larger discrepancy and provides
+evidence against $H_0$.
+
+\vspace{0.3cm}
+
+Under $H_0: CDF_p(i)=CDF_q(i)$, the \textbf{p-value} is can be computed as:
+
+\begin{equation}
+P\!\left(\sqrt{n}D\geq t\right)
+=
+2\sum_{k=1}^{\infty}
+(-1)^{k-1}e^{-2k^2t^2}.
+\end{equation}
+
+For the discretized distributions, the effective sample size is set to
+
+\[
+\boxed{n=B}
+\]
+
+where $B$ is the number of bins.
 
 \end{frame}
 
