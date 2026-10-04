@@ -455,6 +455,7 @@ INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\tex\latex\sansmathaccent\ot1m
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\sansmathaccent\mathkerncmssi10.tfm
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\sansmathaccent\mathkerncmssi8.tfm
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\sansmathaccent\mathkerncmssi8.tfm
+INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmssbx10.tfm
 INPUT .\slides\slide_gan_models.tex
 INPUT .\slides\slide_gan_models.tex
 OUTPUT slides\slide_gan_models.aux
@@ -471,7 +472,6 @@ INPUT .\images\forgan.png
 INPUT .\images\forgan.png
 INPUT .\images\forgan.png
 INPUT .\images\forgan.png
-INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmssbx10.tfm
 INPUT .\images\forgan_rnn.png
 INPUT .\images\forgan_rnn.png
 INPUT .\images\forgan_rnn.png

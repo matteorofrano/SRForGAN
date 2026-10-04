@@ -26,8 +26,9 @@
 \text{Generator Loss }\rightarrow \min_G V(D,G) = \mathbb{E}_{z \sim p_z(z)}\left[\log\left(1-D(G(z|c))\right)\right]
 \end{equation}
 
-This has been proved in the original GAN paper \cite{background:gan} to be equivalent to minimizing the Jensen-Shannon divergence between the real and generated data distributions.
-
+The original GAN paper \cite{background:gan} shows this to be equivalent to minimizing the JS divergence between the real and generated data distributions.\\
+\textbf{Problem: } JS distance does not provide a smooth gradient for the generator. 
+So in the early stages of training, the discriminator can easily reject samples from the generator, leading to vanishing gradients.
 \end{frame}
 
 
@@ -44,7 +45,7 @@ by:
 \end{equation*}
 where $\Pi(\mathbb{P}_r, \mathbb{P}_g)$ denotes the set of all joint distributions $\pi(x, y)$ with marginals $\mathbb{P}_r$ and $\mathbb{P}_g$.\\
 \vspace{1cm}
-CWGAN models rely on the Kantorovich-Rubinstein duality version (\cite{intro:duality}), which
+CWGAN models rely on the Kantorovich-Rubinstein duality version (\cite{background:wgan}), which
 transforms the constrained minimization over transport plans into a maximization over a
 set of 1-Lipschitz continuous functions (the critic).
 
