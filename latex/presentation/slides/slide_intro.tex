@@ -52,7 +52,7 @@ set of 1-Lipschitz continuous functions (the critic).
 \begin{equation}
 \min_G \max_D V(D,G) = \mathbb{E}_{x \sim p_{data}}[D(x \mid c)] 
 - \mathbb{E}_{z \sim p_z}[D(G(z \mid c))]
-+ \lambda GP
+- \lambda GP
 \end{equation}
 
 with $GP$ the gradient penalty term that enforces the 1-Lipschitz constraint on the critic network.

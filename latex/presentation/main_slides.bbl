@@ -133,6 +133,106 @@
       \field{volume}{27}
       \field{year}{2014}
     \endentry
+    \entry{background:forgan}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=3078690b8ba97ec61c413d69c4cfc1bd}{%
+           family={Koochali},
+           familyi={K\bibinitperiod},
+           given={Alireza},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=61f46fd1c3bf1ec12b55f111bc94e4ff}{%
+           family={Schichtel},
+           familyi={S\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=39509991baf1f5b54ef9eede853edd37}{%
+           family={Dengel},
+           familyi={D\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7407b7acfa262023851056a7cd752a26}{%
+           family={Ahmed},
+           familyi={A\bibinitperiod},
+           given={Sheraz},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{c6b7fbd1de94fc6987154b98f6414c22}
+      \strng{fullhash}{67098f1852a845cf3c441491c7f90980}
+      \strng{fullhashraw}{67098f1852a845cf3c441491c7f90980}
+      \strng{bibnamehash}{c6b7fbd1de94fc6987154b98f6414c22}
+      \strng{authorbibnamehash}{c6b7fbd1de94fc6987154b98f6414c22}
+      \strng{authornamehash}{c6b7fbd1de94fc6987154b98f6414c22}
+      \strng{authorfullhash}{67098f1852a845cf3c441491c7f90980}
+      \strng{authorfullhashraw}{67098f1852a845cf3c441491c7f90980}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{Probabilistic forecasting of sensory data with generative adversarial networks--forgan}
+      \field{volume}{7}
+      \field{year}{2019}
+      \field{pages}{63868\bibrangedash 63880}
+      \range{pages}{13}
+    \endentry
+    \entry{srforgan:srforgan}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=a1b163e4420a009c1d6b0076ce43dfd7}{%
+           family={Pacchiardi},
+           familyi={P\bibinitperiod},
+           given={Lorenzo},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=812e39cd0945724779725b741ee7c8cb}{%
+           family={Adewoyin},
+           familyi={A\bibinitperiod},
+           given={Rilwan\bibnamedelima A},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1bfe3443b0b08e9a166b07fa7572baec}{%
+           family={Dueben},
+           familyi={D\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=af8c2045f576cb84ce423817fc4bd740}{%
+           family={Dutta},
+           familyi={D\bibinitperiod},
+           given={Ritabrata},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e8cf8318e1023245cbc55c70d8725335}
+      \strng{fullhash}{9a9b143ab7eaba405fdee30e1e75e85d}
+      \strng{fullhashraw}{9a9b143ab7eaba405fdee30e1e75e85d}
+      \strng{bibnamehash}{e8cf8318e1023245cbc55c70d8725335}
+      \strng{authorbibnamehash}{e8cf8318e1023245cbc55c70d8725335}
+      \strng{authornamehash}{e8cf8318e1023245cbc55c70d8725335}
+      \strng{authorfullhash}{9a9b143ab7eaba405fdee30e1e75e85d}
+      \strng{authorfullhashraw}{9a9b143ab7eaba405fdee30e1e75e85d}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Machine Learning Research}
+      \field{number}{45}
+      \field{title}{Probabilistic forecasting with generative networks via scoring rule minimization}
+      \field{volume}{25}
+      \field{year}{2024}
+      \field{pages}{1\bibrangedash 64}
+      \range{pages}{64}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

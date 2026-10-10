@@ -103,78 +103,57 @@ $\mathcal{O}(N\log N)$ using \textbf{Bluestein's chirp convolution}.
 \end{frame}
 
 
-
-
-\begin{frame}{Validation of the conditional density inversion}
-\textbf{Validation strategy}
-
-The numerical inversion is validated at two levels:
-
-\vspace{0.1cm}
-
-\begin{enumerate}
-
-    \item \textbf{Heston: Monte Carlo benchmark}
-
-    \begin{itemize}
-        \item Generate independent forward paths from each starting state
-        $(X_T,v_T)$.
-        \item Construct an empirical conditional PDF from the terminal
-        log-price samples.
-        \item Compare the Monte Carlo density with the frFFT density.
-    \end{itemize}
-
-    \vspace{0.05cm}
-
-    \item \textbf{Black--Scholes: analytical benchmark}
-
-    \begin{itemize}
-        \item Use the BS characteristic function as input to the same
-        frFFT inversion pipeline.
-        \item Compare the recovered density with the exact Gaussian
-        conditional distribution.
-        \item This isolates numerical errors of the Fourier inversion.
-    \end{itemize}
-
-\end{enumerate}
-
-
-\end{frame}
-
-
-
-
 \begin{frame}{SRForGAN -- Heston test experiments}
-
-\textbf{Distributional performance on unseen trajectories}
-
-\vspace{0.05cm}
 
 \begin{table}
 \centering
 \small
-\begin{tabular}{lcccc}
+\begin{tabular}{lccc}
+\hline
+Parameter 
+& \textbf{Fixed} 
+& \textbf{Vol-of-vol variable} 
+& \textbf{All variable} \\
+\hline
+$\kappa$   & $2.0$       & $2.0$       & $(1.5,5.0)$ \\
+$\theta$   & $0.5$       & $0.5$       & $(0.57,1.5)$ \\
+$\sigma_v$ & $0.9$       & $(0.2,1.3)$ & $(0.2,1.3)$ \\
+\hline
+\end{tabular}
+\end{table}
+
+Common parameters: 
+$x_0=0$, $\mu=0$, $v_0=0.5$, $\rho=-0.7$, $\text{Forecast horizon}=10.$
+
+\begin{table}
+\centering
+\small
+\begin{tabular}{lccccc}
 \toprule
 \textbf{Test setting}
 & \textbf{KS}
+& \textbf{EMD}
 & \textbf{JS}
 & \textbf{Hellinger}
 & \textbf{TV} \\
 \midrule
 Fixed parameters
 & 87.50\%
+& 0.0007
 & 0.1219
 & 0.1043
 & 0.1028 \\
 
 Variable $\sigma_v$
 & 83.00\%
+& 0.0011
 & 0.1499
 & 0.1281
 & 0.1286 \\
 
 All parameters variable
 & 82.10\%
+& 0.0012
 & 0.1500
 & 0.1290
 & 0.1294 \\
@@ -182,7 +161,6 @@ All parameters variable
 \end{tabular}
 \end{table}
 
-\vspace{0.05cm}
 
 \textbf{Kolmogorov-Smirnov acceptance rate:}
 \[
@@ -196,9 +174,7 @@ All parameters variable
 \vspace{0.05cm}
 
 \begin{itemize}
-    \item Increasing parameter variability produces a \textbf{moderate
-    degradation} in all distributional metrics.
-    
+
     \item Allowing all parameters to vary gives results very similar to
     varying only $\sigma_v$, suggesting that the generator can generalize
     across \textbf{different underlying Heston dynamics}.
@@ -247,5 +223,35 @@ All parameters variable
 
 \vfill
 
+\end{frame}
+
+
+
+\begin{frame}{ForGAN architecture for time series probability forecasting}
+
+The LSTM is designed to capture
+\textbf{long-term dependencies} in sequential data while mitigating
+the vanishing-gradient problem of standard RNNs.
+
+
+
+\begin{equation} 
+  \label{eq:imv_lstm} 
+  \begin{aligned} 
+& {\left[\begin{array}{c} 
+\tilde{\mathbf{i}}_t \\ 
+\tilde{\mathbf{f}}_t \\ 
+\tilde{\mathbf{o}}_t 
+\end{array}\right]=\sigma\left(\mathcal{W} \tilde{\mathbf{h}}_{t-1}+\mathcal{U} \mathbf{x}_t+\mathbf{b}\right)} \\ 
+&\tilde{\mathbf j}_t=\tanh\left(\mathcal W_c\tilde{\mathbf h}_{t-1}+\mathcal U_c\mathbf x_t+\mathbf b_c\right) \\
+& \tilde{\mathbf{c}}_t=\tilde{\mathbf{f}}_t \odot \tilde{\mathbf{c}}_{t-1}+\tilde{\mathbf{i}}_t \odot \tilde{\mathbf{j}}_t \qquad \text{carries long-term information}\\ 
+& \tilde{\mathbf{h}}_t=\tilde{\mathbf{o}}_t \odot \tanh \left(\tilde{\mathbf{c}}_t\right) \qquad \text{carries the current sequential representation}
+\end{aligned} 
+\end{equation} 
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[scale=0.35]{images/LSTM.png}
+\end{figure}
 \end{frame}
 

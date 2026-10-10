@@ -1,5 +1,8 @@
 \section{Scoring Rule based GAN}
 
+
+
+
 \begin{frame}{Scoring Rules: Theory and Motivation}
 
 A scoring rule $S(P^\phi, y)$ evaluates a probabilistic forecast $P^\phi$ against
@@ -48,9 +51,9 @@ P^\phi(\cdot\mid c)=P^\star(\cdot\mid c).
 \begin{frame}{From ForGAN to Scoring-Rule ForGAN}
 
 Instead of training a generator through a discriminator,
-the generator directly minimizes a strictly proper scoring rule.
+the generator directly minimizes a strictly proper scoring rule as proposed by \cite{srforgan:srforgan}.
 
-For the univariate forecasting \textbf{Continuous Ranked Probability Score (CRPS)}:
+For univariate forecasting $\rightarrow$ \textbf{Continuous Ranked Probability Score (CRPS)}:
 
 \begin{equation}
 \begin{aligned}

@@ -3,7 +3,7 @@
 
 \begin{frame}{ForGAN architecture for time series probability forecasting}
    
-To generate the future probability distribution of a time series $c = x_0, x_1, \ldots, x_t$, the following steps are taken:
+To generate the future probability distribution of a time series $c = x_0, x_1, \ldots, x_t$, the following steps are taken using the ForGAN architecture introduced by \cite{background:forgan}:
 \begin{enumerate}
     \item Train generator and discriminator using the CGAN or CWGAN loss function using $c_{[t_0, t]}$ as condition and $x_{t+1}$ as target.
     \item The generator is run multiple times using the same trajectory $c$ but perturbed noise vector $z$ obtaining an empirical distribution.
@@ -54,30 +54,29 @@ To generate the future probability distribution of a time series $c = x_0, x_1, 
 \end{columns}
 \end{frame}
 
-\begin{frame}{ForGAN architecture for time series probability forecasting}
-
-The LSTM is designed to capture
-\textbf{long-term dependencies} in sequential data while mitigating
-the vanishing-gradient problem of standard RNNs.
 
 
 
-\begin{equation} 
-  \label{eq:imv_lstm} 
-  \begin{aligned} 
-& {\left[\begin{array}{c} 
-\tilde{\mathbf{i}}_t \\ 
-\tilde{\mathbf{f}}_t \\ 
-\tilde{\mathbf{o}}_t 
-\end{array}\right]=\sigma\left(\mathcal{W} \tilde{\mathbf{h}}_{t-1}+\mathcal{U} \mathbf{x}_t+\mathbf{b}\right)} \\ 
-&\tilde{\mathbf j}_t=\tanh\left(\mathcal W_c\tilde{\mathbf h}_{t-1}+\mathcal U_c\mathbf x_t+\mathbf b_c\right) \\
-& \tilde{\mathbf{c}}_t=\tilde{\mathbf{f}}_t \odot \tilde{\mathbf{c}}_{t-1}+\tilde{\mathbf{i}}_t \odot \tilde{\mathbf{j}}_t \qquad \text{carries long-term information}\\ 
-& \tilde{\mathbf{h}}_t=\tilde{\mathbf{o}}_t \odot \tanh \left(\tilde{\mathbf{c}}_t\right) \qquad \text{carries the current sequential representation}
-\end{aligned} 
-\end{equation} 
+\begin{frame}{Limitations of GANs}
+\textbf{Practical limitations of adversarial training}
 
-\begin{figure} [H]
-    \centering
-    \includegraphics[scale=0.35]{images/LSTM.png}
-\end{figure}
+\vspace{0.5cm}
+
+\begin{itemize}
+    \item \textbf{Non-convergent optimization:}
+    the GAN objective is a non-convex two-player game; stochastic
+    gradient descent is not guaranteed to converge to the Nash equilibrium.
+    \vspace{1cm}
+    \item \textbf{Mode collapse:}
+    the generator may concentrate on a small subset of the target
+    distribution, failing to reproduce the full probabilistic uncertainty.
+    \vspace{1cm}
+    \item \textbf{Vanishing gradients:}
+    when the discriminator becomes too effective, the generator may
+    receive weak or uninformative gradients precisely when it needs
+    corrective feedback.
+
+\end{itemize}
+
+
 \end{frame}
