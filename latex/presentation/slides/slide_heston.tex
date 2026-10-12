@@ -15,7 +15,7 @@ smiles and leverage effects.
 + \sqrt{v_t}\,dW_t^X,\\
 &dv_t
 = \kappa(\theta-v_t)dt
-+ \sigma_v\sqrt{v_t}\,dW_t^v,\\
++ \sigma_v\sqrt{v_t}\,dW_t^v, \qquad \text{CIR process}\\
 &dW_t^X\,dW_t^v
 = \rho\,dt.
 \end{aligned}
@@ -34,7 +34,7 @@ smiles and leverage effects.
 
 \vspace{0.05cm}
 
-\textbf{Variance positivity:}
+\textbf{Strict positivity:}
 \[
 2\kappa\theta > \sigma_v^2
 \qquad\text{(Feller condition)}
@@ -42,65 +42,6 @@ smiles and leverage effects.
 
 \end{frame}
 
-
-
-
-
-\begin{frame}{Numerical approximation and conditional PDF}
-
-\textbf{1. Discretisation of the Heston dynamics}
-
-Correlated Brownian increments are generated using Cholesky decomposition:
-
-\begin{equation}
-\begin{aligned}
-\Delta W_n^X
-&= \sqrt{\Delta t}\,Z_1,\\
-\Delta W_n^v
-&= \sqrt{\Delta t}
-\left(\rho Z_1+\sqrt{1-\rho^2}Z_2\right),
-\end{aligned}
-\qquad
-Z_1,Z_2\sim\mathcal{N}(0,1).
-\end{equation}
-
-The simulator uses Euler--Maruyama for $X_t$ and
-full-truncation Milstein for $v_t$
-
-\vspace{0.1cm}
-
-\textbf{2. Conditional characteristic function}
-
-Given $(X_T,v_T)$, the Heston characteristic function is
-
-\begin{equation}
-\varphi(u;\tau)
-=
-\exp\!\left(
-iuX_T+iu\mu\tau+A(u,\tau)+B(u,\tau)v_T
-\right).
-\end{equation}
-
-\vspace{0.05cm}
-
-\textbf{3. Gil--Pelaez inversion + fractional FFT}
-
-\begin{equation}
-f(x_k)
-\approx
-\frac{\eta}{\pi}
-\operatorname{Re}
-\left[
-\sum_{j=0}^{N-1}
-w_j\varphi(j\eta)
-e^{-ij\eta x_k}
-\right].
-\end{equation}
-
-The sum is evaluated as a \textbf{fractional DFT} and computed in
-$\mathcal{O}(N\log N)$ using \textbf{Bluestein's chirp convolution}.
-
-\end{frame}
 
 
 \begin{frame}{SRForGAN -- Heston test experiments}
@@ -253,5 +194,64 @@ the vanishing-gradient problem of standard RNNs.
     \centering
     \includegraphics[scale=0.35]{images/LSTM.png}
 \end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}{Numerical approximation and conditional PDF}
+
+\textbf{1. Discretisation of the Heston dynamics}
+
+Correlated Brownian increments are generated using Cholesky decomposition:
+
+\begin{equation}
+\begin{aligned}
+\Delta W_n^X
+&= \sqrt{\Delta t}\,Z_1,\\
+\Delta W_n^v
+&= \sqrt{\Delta t}
+\left(\rho Z_1+\sqrt{1-\rho^2}Z_2\right),
+\end{aligned}
+\qquad
+Z_1,Z_2\sim\mathcal{N}(0,1).
+\end{equation}
+
+The simulator uses Euler--Maruyama for $X_t$ and
+full-truncation Milstein for $v_t$
+
+\vspace{0.1cm}
+
+\textbf{2. Conditional characteristic function}
+
+Given $(X_T,v_T)$, the Heston characteristic function is
+
+\begin{equation}
+\varphi(u;\tau)
+=
+\exp\!\left(
+iuX_T+iu\mu\tau+A(u,\tau)+B(u,\tau)v_T
+\right).
+\end{equation}
+
+\vspace{0.05cm}
+
+\textbf{3. Gil--Pelaez inversion + fractional FFT}
+
+\begin{equation}
+f(x_k)
+\approx
+\frac{\eta}{\pi}
+\operatorname{Re}
+\left[
+\sum_{j=0}^{N-1}
+w_j\varphi(j\eta)
+e^{-ij\eta x_k}
+\right].
+\end{equation}
+
+The sum is evaluated as a \textbf{fractional DFT} and computed in
+$\mathcal{O}(N\log N)$ using \textbf{Bluestein's chirp convolution}.
+
 \end{frame}
 

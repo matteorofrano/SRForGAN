@@ -2,40 +2,40 @@
 
 \begin{frame}{Black-Scholes experimental setup}
 
-Under the risk-neutral measure with zero interest rate and
-zero dividend yield, the log-price follows
+Given zero interest rate and
+zero dividend yield, the log-price of the asset follows a Brownian Motion process:
 
 \begin{equation}
 \begin{aligned}
 dX_t^j
-&= -\frac{1}{2}\sigma_j^2\,dt
+&= \mu_j dt -\frac{1}{2}\sigma_j^2\,dt
 + \sigma_j\,dW_t .
 \end{aligned}
 \end{equation}
 
+
 \vspace{0.1cm}
 
-The process is discretized over $N$ uniform time steps:
-
-\begin{equation}
-\begin{aligned}
-X_{t+dt}^j
-&= X_t^j
--\frac{1}{2}\sigma_j^2dt
-+\sigma_j\sqrt{dt}\,Z_t,
-\qquad Z_t\sim\mathcal{N}(0,1).
-\end{aligned}
-\end{equation}
-
-\vspace{0.15cm}
-
 \begin{itemize}
+    \item $\mu_j = 0$: drift
     \item $X_0^j = 0$: initial log-price
     \item $\sigma_j \in (0.1,1.2)$: randomly sampled volatility
     \item $T=1$ year with $N=252$ daily observations
     \item $J=100{,}000$ independent trajectories
 \end{itemize}
 
+\vspace{0.15cm}
+
+The process is discretized over $N$ uniform time steps:
+
+\begin{equation}
+\begin{aligned}
+X_{t+dt}^j
+&= X_t^j + -\frac{1}{2}\sigma_j^2dt
++\sigma_j\sqrt{dt}\,Z_t,
+\qquad Z_t\sim\mathcal{N}(0,1).
+\end{aligned}
+\end{equation}
 
 \end{frame}
 
@@ -64,19 +64,14 @@ X_T^j-\frac{1}{2}\sigma_j^2\Delta t,
 
 where $\Delta t = dt \times \tau$.
 
-\vspace{0.15cm}
+\vspace{0.45cm}
 
 \textbf{Experimental configuration}
 \begin{itemize}
-    \item \textbf{Initial price}: $X_0 = 0.0$
-    \item \textbf{Volatility range}: $\sigma \in (0.1, 1.2)$
-    \item \textbf{Time horizon}: $T = 1.0 $ yearly horizon
-    \item \textbf{Number of time steps}: $N = 252$
-    \item \textbf{Number of simulated paths}: $J = 100{,}000$
     \item \textbf{n-steps ahead}: $\tau = 10$
     \item \textbf{Condition:} $c_j=[X_0^j,X_{dt}^j,\ldots,X_T^j]$
     \item \textbf{Ground truth:} analytical and Monte Carlo Gaussian distribution
-    \item \textbf{Models:} ForGAN with BCE and WGAN-GP losses
+    \item \textbf{Models:} ForGAN with BCE, ForWGAN with Wasserstein loss and Scoring Rule ForGAN
 \end{itemize}
 \end{frame}
 
@@ -95,21 +90,21 @@ Given two discrete probability distributions $P=(p_1,\ldots,p_B)$ and $Q=(q_1,\l
 \begin{column}{0.48\textwidth}
 
 \textbf{Total Variation (TV)}
-
+{\small
 \begin{equation*}
 \delta(P,Q)
 =
 \frac{1}{2}\sum_i |p_i-q_i|
 \end{equation*}
-
-Measures the maximum difference in probability
+}
+Measures the difference in probability
 assigned to the same event. 
 %It is \textbf{bin-blind}: it does not account for the distance between bins.
 
 \vspace{0.2cm}
 
 \textbf{Hellinger distance}
-
+{\small
 \begin{equation*}
 H(P,Q)
 =
@@ -117,9 +112,9 @@ H(P,Q)
 \sqrt{\sum_i
 \left(\sqrt{p_i}-\sqrt{q_i}\right)^2}
 \end{equation*}
-
-Bounded in $[0,1]$ it is more sensitive to differences in the
-tails than TV distance.
+}
+Bounded in $[0,1]$ it is more sensitive to low probability events 
+than TV distance.
 
 \end{column}
 
@@ -129,31 +124,31 @@ tails than TV distance.
 \begin{column}{0.48\textwidth}
 
 \textbf{Jensen--Shannon (JS)}
-
+{\small
 \begin{equation*}
 JS(P,Q)
 =
 \frac{1}{2}KL(P\|M)
 +
-\frac{1}{2}KL(Q\|M),
-\qquad
-M=\frac{P+Q}{2}
+\frac{1}{2}KL(Q\|M)
 \end{equation*}
+}
 
-Symmetric and smoothed version of KL divergence.
+Symmetric and bounded divergence based on KL divergence.
 
 \vspace{0.2cm}
 
 \textbf{Wasserstein distance}
-
+{\small
 \begin{equation*}
 W_1(P,Q)
 =
+\Delta_x
 \sum_i
 \left|
 CDF_P(i)-CDF_Q(i)
 \right|
-\end{equation*}
+\end{equation*}}
 \textbf{geometry-aware}: it accounts for how far
 probability mass must be moved between bins to match.
 
@@ -170,38 +165,42 @@ probability mass must be moved between bins to match.
 
 \begin{frame}{Kolmogorov--Smirnov (KS) test}
 
-The KS test is a \textbf{distribution-free} and \textbf{non-parametric} test that measures the maximum discrepancy between an
-empirical $CDF_p$ and a reference CDF $CDF_q$:
+The KS test is a \textbf{non-parametric} and
+\textbf{distribution-free} test based on the maximum
+discrepancy between two empirical CDFs:
 
-
-\begin{equation}
-D
+\begin{equation*}
+D_{n,m}
 =
-\max_{k=1, \ldots, B}
+\sup_x
 \left|
-CDF_p(k)
--
-CDF_q(k)
+\hat F_n(x)-\hat G_m(x)
 \right|.
-\end{equation}
+\end{equation*}
 
-
-Large $D$ indicates a larger discrepancy and provides
-evidence against $H_0$.
+Large $D_{n,m}$ indicates a larger discrepancy and
+provides evidence against $H_0$.
 
 \vspace{0.3cm}
 
-Under $H_0: CDF_p(i)=CDF_q(i)$, the \textbf{p-value} can be computed using the survival function of the KS distribution:
+Under
+\[
+H_0:\;F(x)=G(x)\quad\forall x,
+\]
+the asymptotic p-value is obtained from the Kolmogorov
+distribution:
 
-\begin{equation}
-P\!\left(\sqrt{n}D\geq t\right)
-=
-2\sum_{i=1}^{\infty}
-(-1)^{i-1}e^{-2i^2t^2}.
-\end{equation}
+\begin{equation*}
+p
+\approx
+Q_{\mathrm{KS}}
+\left(
+\sqrt{\frac{nm}{n+m}}\,D_{n,m}
+\right),
+\end{equation*}
 
-Where $n$ is the number of samples in the empirical distribution. 
-
+where $n$ and $m$ are the sample sizes of the two
+empirical distributions.
 \end{frame}
 
 

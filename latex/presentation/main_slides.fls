@@ -504,13 +504,6 @@ INPUT slides\slide_bs_results.tex
 INPUT .\main_slides.toc
 INPUT .\main_slides.toc
 INPUT main_slides.toc
-INPUT .\images\samples_forgan_simple.png
-INPUT .\images\samples_forgan_simple.png
-INPUT .\images\samples_forgan_simple.png
-INPUT .\images\samples_forgan_simple.png
-INPUT .\images\samples_forgan_simple.png
-INPUT .\images\samples_forgan_simple.png
-INPUT .\images\samples_forgan_simple.png
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmss9.tfm
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmss8.tfm
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr9.tfm
@@ -527,6 +520,13 @@ INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\sym
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\sansmathaccent\mathkerncmssi9.tfm
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\tfm\public\sansmathaccent\mathkerncmssi8.tfm
+INPUT .\images\samples_forgan_simple.png
+INPUT .\images\samples_forgan_simple.png
+INPUT .\images\samples_forgan_simple.png
+INPUT .\images\samples_forgan_simple.png
+INPUT .\images\samples_forgan_simple.png
+INPUT .\images\samples_forgan_simple.png
+INPUT .\images\samples_forgan_simple.png
 INPUT .\images\samples_forgan.png
 INPUT .\images\samples_forgan.png
 INPUT .\images\samples_forgan.png
@@ -608,6 +608,8 @@ INPUT main_slides.run.xml
 OUTPUT main_slides.run.xml
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
+INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cmextra\cmex9.pfb
+INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cmextra\cmex9.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi5.pfb
@@ -618,6 +620,8 @@ INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\c
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi9.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr5.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr5.pfb
+INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
+INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss10.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss10.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss12.pfb
@@ -640,6 +644,8 @@ INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\c
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy7.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy7.pfb
+INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy9.pfb
+INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy9.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb
 INPUT C:\Users\matte\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm7.pfb
