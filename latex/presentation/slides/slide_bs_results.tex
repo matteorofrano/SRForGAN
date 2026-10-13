@@ -78,129 +78,32 @@ where $\Delta t = dt \times \tau$.
 %===========================================================
 % Statistical distance metrics
 %===========================================================
+\begin{frame}{Distribution comparison and statistical testing}
 
-\begin{frame}{Statistical distance metrics}
-Given two discrete probability distributions $P=(p_1,\ldots,p_B)$ and $Q=(q_1,\ldots,q_B)$ over the same support.
+Given two distributions $P$ and $Q$ over the same support:
+\vspace{0.5cm}
+\begin{itemize}
 
-\begin{columns}[T,onlytextwidth]
+    \item \textbf{Total Variation} $\rightarrow TV(P,Q)=\frac{1}{2}\sum_i |p_i-q_i|$\\
+    Measures the difference in probability
+    assigned to the same event. 
+    \vspace {0.4cm}
+    \item \textbf{Hellinger distance} $\rightarrow H(P,Q)=\frac{1}{\sqrt{2}}\sqrt{\sum_i(\sqrt{p_i}-\sqrt{q_i})^2}$\\
+    Bounded in $[0,1]$ it is more sensitive to low probability events.
+    \vspace {0.4cm}
+    \item \textbf{Jensen--Shannon} $\rightarrow JS(P,Q)=\frac{1}{2}KL(P\|M)+\frac{1}{2}KL(Q\|M),\qquad M=\frac{P+Q}{2}$\\
+    Symmetric and bounded divergence based on KL divergence.
+    \vspace{0.4cm}
+    \item \textbf{Wasserstein distance} $\rightarrow W_1(P,Q)=\Delta_x\sum_i|CDF_P(i)-CDF_Q(i)|$\\
+    \emph{geometry-aware}: it accounts for how far
+    probability mass must be moved between bins to match.
 
-%-----------------------------------------------------------
-% LEFT COLUMN
-%-----------------------------------------------------------
-\begin{column}{0.48\textwidth}
+    \vspace{0.4cm}
+    \item \textbf{Kolmogorov--Smirnov (KS) test} $\rightarrow D_{n,m}=\sup_x|\hat F_n(x)-\hat G_m(x)|$\\
+    Tests whether the two empirical distributions differ. Under $H_0:\;F(x)=G(x)\quad\forall x,$ 
+    the asymptotic p-value is obtained from the Kolmogorov distribution.
 
-\textbf{Total Variation (TV)}
-{\small
-\begin{equation*}
-\delta(P,Q)
-=
-\frac{1}{2}\sum_i |p_i-q_i|
-\end{equation*}
-}
-Measures the difference in probability
-assigned to the same event. 
-%It is \textbf{bin-blind}: it does not account for the distance between bins.
-
-\vspace{0.2cm}
-
-\textbf{Hellinger distance}
-{\small
-\begin{equation*}
-H(P,Q)
-=
-\frac{1}{\sqrt{2}}
-\sqrt{\sum_i
-\left(\sqrt{p_i}-\sqrt{q_i}\right)^2}
-\end{equation*}
-}
-Bounded in $[0,1]$ it is more sensitive to low probability events 
-than TV distance.
-
-\end{column}
-
-%-----------------------------------------------------------
-% RIGHT COLUMN
-%-----------------------------------------------------------
-\begin{column}{0.48\textwidth}
-
-\textbf{Jensen--Shannon (JS)}
-{\small
-\begin{equation*}
-JS(P,Q)
-=
-\frac{1}{2}KL(P\|M)
-+
-\frac{1}{2}KL(Q\|M)
-\end{equation*}
-}
-
-Symmetric and bounded divergence based on KL divergence.
-
-\vspace{0.2cm}
-
-\textbf{Wasserstein distance}
-{\small
-\begin{equation*}
-W_1(P,Q)
-=
-\Delta_x
-\sum_i
-\left|
-CDF_P(i)-CDF_Q(i)
-\right|
-\end{equation*}}
-\textbf{geometry-aware}: it accounts for how far
-probability mass must be moved between bins to match.
-
-\end{column}
-
-\end{columns}
-
-\end{frame}
-
-
-%===========================================================
-% Kolmogorov--Smirnov test
-%===========================================================
-
-\begin{frame}{Kolmogorov--Smirnov (KS) test}
-
-The KS test is a \textbf{non-parametric} and
-\textbf{distribution-free} test based on the maximum
-discrepancy between two empirical CDFs:
-
-\begin{equation*}
-D_{n,m}
-=
-\sup_x
-\left|
-\hat F_n(x)-\hat G_m(x)
-\right|.
-\end{equation*}
-
-Large $D_{n,m}$ indicates a larger discrepancy and
-provides evidence against $H_0$.
-
-\vspace{0.3cm}
-
-Under
-\[
-H_0:\;F(x)=G(x)\quad\forall x,
-\]
-the asymptotic p-value is obtained from the Kolmogorov
-distribution:
-
-\begin{equation*}
-p
-\approx
-Q_{\mathrm{KS}}
-\left(
-\sqrt{\frac{nm}{n+m}}\,D_{n,m}
-\right),
-\end{equation*}
-
-where $n$ and $m$ are the sample sizes of the two
-empirical distributions.
+\end{itemize}
 \end{frame}
 
 

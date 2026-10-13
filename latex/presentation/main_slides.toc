@@ -2,4 +2,4 @@
 \beamer@sectionintoc {2}{GAN for Time Series}{6}{0}{2}
 \beamer@sectionintoc {3}{Scoring Rule based GAN}{10}{0}{3}
 \beamer@sectionintoc {4}{Black-Scholes Experiment's Results}{14}{0}{4}
-\beamer@sectionintoc {5}{Heston Experiment}{23}{0}{5}
+\beamer@sectionintoc {5}{Heston Experiment}{22}{0}{5}
