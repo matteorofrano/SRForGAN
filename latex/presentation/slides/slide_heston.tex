@@ -49,16 +49,15 @@ smiles and leverage effects.
 \begin{table}
 \centering
 \small
-\begin{tabular}{lccc}
+\begin{tabular}{lcc}
 \hline
-Parameter 
-& \textbf{Fixed} 
+Parameter  
 & \textbf{Vol-of-vol variable} 
 & \textbf{All variable} \\
 \hline
-$\kappa$   & $2.0$       & $2.0$       & $(1.5,5.0)$ \\
-$\theta$   & $0.5$       & $0.5$       & $(0.57,1.5)$ \\
-$\sigma_v$ & $0.9$       & $(0.2,1.3)$ & $(0.2,1.3)$ \\
+$\kappa$      & $2.0$       & $(1.5,5.0)$ \\
+$\theta$      & $0.5$       & $(0.57,1.5)$ \\
+$\sigma_v$    & $(0.2,1.3)$ & $(0.2,1.3)$ \\
 \hline
 \end{tabular}
 \end{table}
@@ -78,12 +77,6 @@ $x_0=0$, $\mu=0$, $v_0=0.5$, $\rho=-0.7$, $\text{Forecast horizon}=10.$
 & \textbf{Hellinger}
 & \textbf{TV} \\
 \midrule
-Fixed parameters
-& 87.50\%
-& 0.0007
-& 0.1219
-& 0.1043
-& 0.1028 \\
 
 Variable $\sigma_v$
 & 83.00\%
@@ -103,10 +96,8 @@ All parameters variable
 \end{table}
 
 
-\textbf{Kolmogorov-Smirnov acceptance rate:}
+\textbf{Kolmogorov-Smirnov no-rejection rate:}
 \[
-0.8750
-\qquad\longrightarrow\qquad
 0.0.8300
 \qquad\longrightarrow\qquad
 0.8210
@@ -124,16 +115,6 @@ All parameters variable
 
 \end{frame}
 
-
-
-\begin{frame}{SRForGAN -- Heston test with fixed parameters}
-  
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.35]{images/srforgan_samples_2.png}
-    \caption{Samples obtained using fixed $x_0$, $\mu$, $v_0$, $\theta$, $\kappa$, $\rho$ and $\sigma_v$}
-\end{figure}
-\end{frame}
 
 \begin{frame}{SRForGAN -- Heston test with variable vol parameter}
   
@@ -255,3 +236,30 @@ $\mathcal{O}(N\log N)$ using \textbf{Bluestein's chirp convolution}.
 
 \end{frame}
 
+\begin{frame}{Conditions for the Energy Score as a Training Loss}
+
+\begin{itemize}
+    \item \textbf{A strict proper scoring rule:}
+    The CRPS is obtained from the general Kernel score $S_k(P^\phi, y) = \mathbb{E}[k(X,X')] - 2\mathbb{E}[k(X,y)]$
+    where $k(x,y) = -\|x-y\|^\beta$ with $\beta = 1$ is a strictly proper scoring as shown in \cite{srforgan:srforgan}.
+    \item \textbf{Finite $\beta$-th moments:}
+    Requires $\mathbb{E}_{X\sim P^\phi}\|X\|^\beta<\infty$. The generator satisfies
+    $\|G_\phi(z,c)\|\leq\|G_\phi(0,c)\|+L_\phi(c)\|z\|$ since
+    Gaussian noise have finite moments of every order. 
+    \cite{srforgan:srforgan}
+
+    \item \textbf{Unbiased estimator:}
+    with i.i.d.\ generated samples and linearity of expectation give
+    $\mathbb{E}[\widehat S_E^{(\beta)}]=S_E^{(\beta)}$.
+
+    \item \textbf{i.i.d.\ training pairs:}
+    independently sampled model parameters are integrated out, yielding
+    $(c_j,y_j)\stackrel{\mathrm{i.i.d.}}{\sim}P(C,Y)$.
+
+    \item \textbf{Reparameterizable generator:}
+    $X=G_\phi(z,c)$ with $z\sim\mathcal N(0,I)$ is differentiable.
+    Bounded moments allow differentiation under the expectation, giving
+    $\nabla_\phi\mathbb{E}[S_E]=\mathbb{E}[\nabla_\phi S_E]$.
+\end{itemize}
+
+\end{frame}
